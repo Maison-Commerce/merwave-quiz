@@ -70,8 +70,7 @@ Vs the landings, the quiz adds: sticky **topbar** (logo + progress + counter 1/1
 --font-accent:  "Quincy CF", "Fraunces", Georgia, serif;  /* italic 700 for <em> */
 ```
 
-**Fonts are wired and self-hosted** from `quiz/fonts/quincy-cf/` (Quincy CF — Bold + Bold-Italic + Regular) and `quiz/fonts/proxima-nova/` (Regular 400 + Bold 700, woff/ttf). Two caveats before launch:
-- Quincy CF files are currently **Fontspring DEMO/trial** `.otf` — swap for the licensed files (same paths/weights).
+**Fonts are wired and self-hosted** from `quiz/fonts/quincy-cf/` (Quincy CF — **licensed** webfonts: Regular 400, Medium 500, Bold 700 + Bold Italic, woff2+woff) and `quiz/fonts/proxima-nova/` (Regular 400 + Bold 700, woff/ttf). One caveat:
 - Proxima Nova **Medium (500)** and **Semibold (600)** were not supplied, so the CSS cascade maps 500→Regular and 600→Bold. Add those two faces if the heavier-than-regular option labels need to be exact.
 
 ### Type scale (Desktop → Mobile @ ≤640px)
@@ -166,7 +165,7 @@ Still `[confirm]` (hardcoded from PDF, flagged inline):
 - Scarcity mechanism (screen 17 — intentionally **no fake countdown**)
 
 Pending assets / config:
-- **Fonts:** wired ✓ — but replace the Quincy CF **DEMO** files with licensed ones, and optionally add Proxima Nova Medium/Semibold.
+- **Fonts:** wired ✓ — licensed Quincy CF webfonts (woff2). Optionally add Proxima Nova Medium/Semibold.
 - **Logo:** wired ✓ — `assets/logo.png` (Merwave slate wordmark) in the topbar.
 - **Product image:** injected at runtime from the Shopify product image (CDN); local `product-kit.png` is only a fallback.
 - **Before/after:** placeholder wells on screen 7 still need real flat-vs-defined images.

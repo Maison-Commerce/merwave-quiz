@@ -13,27 +13,35 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <style>
 /* ============================================
-   FONTS — Merwave brand (self-hosted)
+   FONTS — Merwave brand (self-hosted, licensed)
    ============================================
-   Headings: Quincy CF  (currently Fontspring DEMO/trial .otf — swap for the
-             licensed files before launch; keep the same paths/weights).
+   Headings: Quincy CF  (licensed webfonts — Regular 400, Medium 500, Bold 700 + Bold Italic).
    Body:     Proxima Nova (Regular 400 + Bold 700 supplied; Medium 500 and
              Semibold 600 were not, so the cascade maps 500→Regular, 600→Bold).
    ============================================ */
 @font-face {
   font-family: "Quincy CF";
-  src: url("fonts/quincy-cf/quincycf-bold.otf") format("opentype");
+  src: url("fonts/quincy-cf/QuincyCF-Regular.woff2") format("woff2"),
+       url("fonts/quincy-cf/QuincyCF-Regular.woff") format("woff");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Quincy CF";
+  src: url("fonts/quincy-cf/QuincyCF-Medium.woff2") format("woff2"),
+       url("fonts/quincy-cf/QuincyCF-Medium.woff") format("woff");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Quincy CF";
+  src: url("fonts/quincy-cf/QuincyCF-Bold.woff2") format("woff2"),
+       url("fonts/quincy-cf/QuincyCF-Bold.woff") format("woff");
   font-weight: 700; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: "Quincy CF";
-  src: url("fonts/quincy-cf/quincycf-bolditalic.otf") format("opentype");
+  src: url("fonts/quincy-cf/QuincyCF-BoldItalic.woff2") format("woff2"),
+       url("fonts/quincy-cf/QuincyCF-BoldItalic.woff") format("woff");
   font-weight: 700; font-style: italic; font-display: swap;
-}
-@font-face {
-  font-family: "Quincy CF";
-  src: url("fonts/quincy-cf/quincycf-regular.otf") format("opentype");
-  font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: "Proxima Nova";
