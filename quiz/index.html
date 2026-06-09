@@ -1,0 +1,1816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<meta name="GPTBot" content="noindex, nofollow">
+<meta name="ClaudeBot" content="noindex, nofollow">
+<meta name="CCBot" content="noindex, nofollow">
+<meta name="Google-Extended" content="noindex, nofollow">
+<title>Merwave Hair Analysis — is your hair actually curly?</title>
+<meta name="description" content="Answer a few questions about how your hair really behaves, and we'll tell you what type your hair actually is — and the routine built for it.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<style>
+/* ============================================
+   FONTS — Merwave brand (self-hosted)
+   ============================================
+   Headings: Quincy CF  (currently Fontspring DEMO/trial .otf — swap for the
+             licensed files before launch; keep the same paths/weights).
+   Body:     Proxima Nova (Regular 400 + Bold 700 supplied; Medium 500 and
+             Semibold 600 were not, so the cascade maps 500→Regular, 600→Bold).
+   ============================================ */
+@font-face {
+  font-family: "Quincy CF";
+  src: url("fonts/quincy-cf/quincycf-bold.otf") format("opentype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Quincy CF";
+  src: url("fonts/quincy-cf/quincycf-bolditalic.otf") format("opentype");
+  font-weight: 700; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Quincy CF";
+  src: url("fonts/quincy-cf/quincycf-regular.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("fonts/proxima-nova/ProximaNovaRegular.woff") format("woff"),
+       url("fonts/proxima-nova/ProximaNovaRegular.ttf") format("truetype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("fonts/proxima-nova/ProximaNovaBold.woff") format("woff"),
+       url("fonts/proxima-nova/ProximaNovaBold.ttf") format("truetype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+/* ============================================
+   DESIGN TOKENS (Merwave UI Kit — Figma)
+   ============================================ */
+:root {
+  /* Brand 1 — soft dusty blue (primary accent) */
+  --color-brand1-100:  #FDFDFE;
+  --color-brand1-400:  #DFE7F1;
+  --color-brand1-1200: #9FB8D4;
+  --color-brand1-1400: #94B0CF;
+  --color-brand1-1800: #86A6C9;
+
+  /* Brand 2 — warm cream / greige neutrals (surfaces) */
+  --color-brand2-200:  #FDFDFC;  /* page background */
+  --color-brand2-600:  #F6F6F2;
+  --color-brand2-800:  #F3F3ED;  /* soft surface — option icon, why-box, cards */
+  --color-brand2-1800: #EAE9DF;  /* slightly stronger surface */
+  --color-brand2-2000: #F3F0EC;
+  --color-brand2-2400: #BAB9B1;  /* muted border / skeleton */
+  --color-brand2-2800: #83827C;  /* muted text */
+
+  /* Brand 3 — soft yellow / olive (secondary accent) */
+  --color-brand3-1800: #F9F2B3;
+  --color-brand3-2400: #C6C08E;
+  --color-brand3-3200: #434130;
+
+  /* Accent gradient (selected option border, progress, chart) */
+  --color-primary-start:   #86A6C9;
+  --color-primary-end:     #9FB8D4;
+  --color-primary-gradient: linear-gradient(90deg, #86A6C9, #9FB8D4);
+
+  --color-white: #FFFFFF;
+
+  /* CTA / dark surfaces — warm charcoal */
+  --color-ink: #3D3D3D;       /* Text/Primary, CTA bg */
+  --color-ink-hover: #2C2A2B;
+
+  --color-text-primary:   #3D3D3D;
+  --color-text-secondary: #5C5358;  /* derived warm grey */
+  --color-text-tertiary:  #83827C;
+  --color-text-on-dark:   #FFFFFF;
+  --color-text-on-dark-muted: #D8D7CE;
+
+  --color-border-subtle:   #E6E5DD;  /* warm hairline */
+  --color-border-selected: #86A6C9;
+
+  --color-accent:       #12B76A;  /* Success/600 — green ticks, "Included" */
+  --color-accent-dark:  #027A48;  /* Success/800 */
+  --color-accent-light: #F6FEF9;  /* Success/50 */
+  --color-star:  #FEC84B;         /* Warning/400 — gold stars */
+  --color-warn:  #F79009;
+  --color-bad:   #F04438;         /* Error/600 */
+
+  --font-primary: "Proxima Nova", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-heading: "Quincy CF", Georgia, "Times New Roman", serif;
+  --font-accent:  "Quincy CF", Georgia, serif;
+
+  --space-4: 4px; --space-8: 8px; --space-12: 12px; --space-16: 16px;
+  --space-20: 20px; --space-24: 24px; --space-32: 32px; --space-40: 40px;
+  --space-48: 48px; --space-64: 64px; --space-80: 80px;
+
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-full: 9999px;
+
+  /* Soft shadows (Merwave uses them — unlike the borders-only Restfulness build) */
+  --shadow-lg: 0 4px 6px -2px rgba(16,24,40,0.03), 0 12px 16px -4px rgba(16,24,40,0.08);
+  --shadow-xl: 0 8px 8px -4px rgba(16,24,40,0.03), 0 20px 24px -4px rgba(16,24,40,0.08);
+
+  --ease-std: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-primary);
+  color: var(--color-text-primary);
+  background: var(--color-brand2-200);
+  line-height: 1.5;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; font-family: inherit; background: none; color: inherit; }
+
+[x-cloak] { display: none !important; }
+
+/* ============================================
+   SKELETON SHIMMER
+   ============================================ */
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -100% 0; }
+}
+img:not([data-no-skeleton]) {
+  background-color: var(--color-brand2-1800);
+  background-image: linear-gradient(100deg,
+    #EAE9DF 0%, #EAE9DF 30%, #F3F3ED 45%,
+    #FDFDFC 50%, #F3F3ED 55%, #EAE9DF 70%, #EAE9DF 100%);
+  background-size: 250% 100%;
+  background-repeat: no-repeat;
+  animation: skeleton-shimmer 1s linear infinite;
+}
+img[data-loaded="true"] { background: none !important; animation: none; }
+
+/* ============================================
+   TOP BAR (logo + progress + step counter)
+   ============================================ */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(253, 253, 252, 0.92);
+  backdrop-filter: saturate(180%) blur(10px);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+.topbar__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+}
+.topbar__logo { display: inline-flex; align-items: center; }
+.topbar__logo img { height: 24px; width: auto; display: block; }
+/* Wordmark fallback until a logo image is supplied */
+.topbar__logo-text {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  color: var(--color-text-primary);
+}
+@media (max-width: 640px) {
+  .topbar__logo img { height: 20px; }
+  .topbar__logo-text { font-size: 19px; }
+}
+.topbar__progress {
+  width: min(420px, 50vw);
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--color-brand2-1800);
+  overflow: hidden;
+}
+.topbar__progress-fill {
+  height: 100%;
+  background: var(--color-primary-gradient);
+  border-radius: 9999px;
+  transition: width 0.45s var(--ease-std);
+}
+.topbar__count {
+  text-align: right;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.5px;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 640px) {
+  .topbar__inner { padding: 12px 16px; gap: 12px; }
+  .topbar__count { font-size: 11px; }
+}
+
+/* ============================================
+   SHELL / STEP CARD
+   ============================================ */
+.quiz-shell {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 48px 24px 140px;
+}
+@media (max-width: 640px) {
+  .quiz-shell { padding: 24px 16px 120px; }
+}
+
+.step-trans-enter { transition: opacity 0.3s ease; transition-delay: 0.18s; }
+.step-trans-enter-start { opacity: 0; }
+.step-trans-enter-end { opacity: 1; }
+.step-trans-leave { transition: opacity 0.16s ease; }
+.step-trans-leave-start { opacity: 1; }
+.step-trans-leave-end { opacity: 0; }
+
+.step__eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-brand1-1800);
+  margin-bottom: 12px;
+}
+.step__title {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: var(--color-text-primary);
+  margin-bottom: 14px;
+}
+.step__title em {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--color-brand1-1800);
+}
+.step__subtitle {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+  margin-bottom: 32px;
+}
+.step__subtitle--inline-icon { display: flex; align-items: flex-start; gap: 10px; }
+.step__subtitle--stacked p + p { margin-top: 12px; }
+.step__subtitle-icon {
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--color-brand1-1800);
+  color: white;
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-top: 3px;
+}
+.step__question {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+  margin-bottom: 20px;
+}
+.step__question-helper {
+  font-size: 14px;
+  color: var(--color-text-tertiary);
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+@media (max-width: 640px) {
+  .step__title { font-size: 26px; }
+  .step__subtitle { font-size: 15px; margin-bottom: 24px; }
+  .step__question { font-size: 20px; }
+}
+
+/* ============================================
+   ANSWER OPTIONS
+   ============================================ */
+.options { display: flex; flex-direction: column; gap: 10px; }
+
+.option {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  background: var(--color-white);
+  border: 2px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  transition: border-color 0.2s var(--ease-std), background 0.2s var(--ease-std), box-shadow 0.2s var(--ease-std), transform 0.18s var(--ease-std);
+}
+.option:hover { border-color: var(--color-brand1-1200); box-shadow: var(--shadow-lg); }
+.option:active { transform: translateY(1px); }
+.option--selected {
+  border-color: transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    var(--color-primary-gradient) border-box;
+  box-shadow: var(--shadow-lg);
+}
+.option__icon {
+  flex-shrink: 0;
+  width: 38px; height: 38px;
+  border-radius: var(--radius-sm);
+  background: var(--color-brand2-800);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--color-text-primary);
+}
+.option__icon-emoji { font-size: 22px; line-height: 1; }
+.option__label { flex: 1; }
+.option__check {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border-subtle);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: transparent;
+  transition: all 0.2s var(--ease-std);
+}
+.option--selected .option__check {
+  background: var(--color-primary-gradient);
+  color: var(--color-white);
+}
+.option--multi { position: relative; }
+
+/* ============================================
+   STEP NAV (Back / Continue)
+   ============================================ */
+.step-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 60;
+  background: rgba(253, 253, 252, 0.94);
+  backdrop-filter: saturate(180%) blur(10px);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  border-top: 1px solid var(--color-border-subtle);
+  padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.step-nav__inner {
+  width: 100%; max-width: 640px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.step-nav__inner--solo .btn-cta--full { width: 100%; flex: 1; }
+@media (max-width: 640px) {
+  .step-nav { padding: 12px 16px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+}
+.btn-back {
+  font-size: 14px; font-weight: 600;
+  color: var(--color-text-tertiary);
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: color 0.2s ease;
+}
+.btn-back:hover { color: var(--color-text-primary); }
+.btn-back[disabled] { visibility: hidden; pointer-events: none; }
+
+.btn-cta {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 12px;
+  height: 52px;
+  padding: 4px 28px;
+  background: var(--color-ink);
+  color: var(--color-white);
+  font-family: var(--font-primary);
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  transition: background 0.2s ease, transform 0.18s var(--ease-std), filter 0.18s ease;
+  border: 0;
+  position: relative;
+  overflow: hidden;
+}
+.btn-cta:hover { background: var(--color-ink-hover); filter: brightness(1.04); }
+.btn-cta:active { transform: translateY(1px); }
+.btn-cta[disabled],
+.btn-cta[aria-disabled="true"] { background: var(--color-brand2-2400); cursor: not-allowed; pointer-events: none; }
+.btn-cta[aria-busy="true"] { background: var(--color-brand2-2400) !important; pointer-events: none; cursor: not-allowed; }
+.btn-cta[aria-busy="true"] .btn-cta__content { display: none; }
+.btn-cta[aria-busy="true"] .btn-cta__loading { display: inline-flex; }
+.btn-cta__loading { display: none; align-items: center; gap: 10px; font-weight: 600; }
+.btn-cta__spinner {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: currentColor;
+  animation: btn-cta-spin 0.7s linear infinite;
+}
+@keyframes btn-cta-spin { to { transform: rotate(360deg); } }
+.btn-cta__arrow { display: inline-flex; align-items: center; }
+.btn-cta--full { width: 100%; height: 56px; font-size: 16px; }
+.btn-cta--xl { height: 60px; font-size: 17px; }
+
+/* ============================================
+   SOCIAL PROOF BLOCKQUOTE (Screen 1)
+   ============================================ */
+.proof-quote {
+  margin-top: 32px;
+  padding: 18px;
+  background: var(--color-brand2-800);
+  border-radius: var(--radius-md);
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.proof-quote__avatar {
+  flex-shrink: 0; width: 44px; height: 44px;
+  border-radius: 50%; overflow: hidden;
+  background: var(--color-brand2-1800);
+}
+.proof-quote__avatar img { width: 100%; height: 100%; object-fit: cover; }
+.proof-quote__avatar--initial {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-primary); font-weight: 700; font-size: 17px; font-style: normal;
+  color: var(--color-text-secondary);
+}
+.proof-quote__text { font-size: 14px; line-height: 1.55; color: var(--color-text-secondary); font-style: italic; }
+.proof-quote__name { display: block; margin-top: 8px; font-style: normal; font-weight: 700; color: var(--color-text-primary); font-size: 13px; }
+
+/* ============================================
+   "WHY WE ASK" INFO BOX
+   ============================================ */
+.why-box {
+  margin-top: 18px;
+  padding: 16px 18px;
+  background: var(--color-brand2-800);
+  border-radius: var(--radius-md);
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.why-box__icon {
+  flex-shrink: 0; width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--color-brand1-1800);
+  color: var(--color-white);
+  font-size: 12px; font-weight: 700; font-style: italic;
+  font-family: Georgia, serif;
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.why-box__title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-tertiary); margin-bottom: 4px; }
+.why-box__text { font-size: 13.5px; line-height: 1.55; color: var(--color-text-secondary); }
+
+/* ============================================
+   BEFORE / AFTER STRIP (Screen 7 + 14)
+   ============================================ */
+.beforeafter {
+  margin-top: 24px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.beforeafter--single { display: block; margin: 24px 0 0; }
+.beforeafter--single img {
+  width: 100%; display: block;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+.beforeafter__cell {
+  background: var(--color-brand2-800);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  position: relative;
+}
+.beforeafter__cell img { width: 100%; height: 100%; object-fit: cover; }
+.beforeafter__tag {
+  position: absolute; left: 10px; top: 10px;
+  padding: 4px 10px; border-radius: 9999px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.beforeafter__tag--before { background: rgba(61,61,61,0.85); color: #fff; }
+.beforeafter__tag--after  { background: var(--color-accent); color: #fff; }
+.beforeafter__cell-empty {
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-text-tertiary); font-size: 12px; text-align: center; padding: 12px;
+}
+
+/* ============================================
+   VISUAL SCALE (Screen 4 severity) — wave flattening
+   ============================================ */
+.scale-vis {
+  display: flex; align-items: flex-end; gap: 4px;
+  width: 44px; height: 38px;
+}
+.scale-vis svg { width: 100%; height: 100%; color: var(--color-brand1-1800); }
+
+/* ============================================
+   STEPS 10 / 13: LOADERS
+   ============================================ */
+.loader { text-align: center; padding: 32px 0; }
+.loader__title {
+  font-family: var(--font-heading);
+  font-size: 28px; font-weight: 700; line-height: 1.3;
+  color: var(--color-text-primary); margin-bottom: 12px;
+}
+.loader__subtitle {
+  font-size: 15px; color: var(--color-text-secondary);
+  margin-bottom: 32px; max-width: 440px; margin-left: auto; margin-right: auto;
+}
+.loader__bar {
+  position: relative; height: 6px; border-radius: 9999px;
+  background: var(--color-brand2-1800); overflow: hidden;
+  max-width: 420px; margin: 0 auto 16px;
+}
+.loader__bar-fill {
+  position: absolute; top: 0; left: 0; bottom: 0;
+  background: var(--color-primary-gradient);
+  border-radius: 9999px; width: 0;
+  transition: width 0.2s linear;
+}
+.loader__pct { font-size: 12px; font-weight: 600; color: var(--color-text-tertiary); letter-spacing: 0.5px; font-variant-numeric: tabular-nums; }
+
+.checklist {
+  margin-top: 24px; max-width: 360px; margin-left: auto; margin-right: auto; text-align: left;
+}
+.checklist__row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 4px;
+  border-bottom: 1px dashed var(--color-border-subtle);
+}
+.checklist__row:last-child { border-bottom: 0; }
+.checklist-enter { transition: opacity 0.32s var(--ease-std), transform 0.32s var(--ease-std); }
+.checklist-enter-start { opacity: 0; transform: translateY(8px); }
+.checklist-enter-end   { opacity: 1; transform: translateY(0); }
+.checklist__row-icon {
+  flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--color-brand2-1800);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.checklist__row.is-done .checklist__row-icon { background: var(--color-brand1-1800); color: var(--color-white); }
+.checklist__row.is-spinning .checklist__row-icon { background: var(--color-brand2-1800); }
+.checklist__row.is-spinning .checklist__row-icon::after {
+  content: ''; width: 12px; height: 12px; border-radius: 50%;
+  border: 2px solid var(--color-brand1-400); border-top-color: var(--color-brand1-1800);
+  animation: btn-cta-spin 0.7s linear infinite;
+}
+.checklist__row-text { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+
+/* ============================================
+   SCREEN 14: DIAGNOSIS (wave meter + card)
+   ============================================ */
+.diagnosis-meter { position: relative; margin: 0 auto 24px; max-width: 360px; }
+.diagnosis-meter__svg { width: 100%; display: block; overflow: visible; }
+.meter-needle { transform-origin: 100px 100px; animation: meter-swing 1.1s var(--ease-std) both; }
+@keyframes meter-swing {
+  0%   { transform: rotate(-95deg); }
+  55%  { transform: rotate(-58deg); }
+  75%  { transform: rotate(-74deg); }
+  100% { transform: rotate(-66deg); }
+}
+.diagnosis-meter__label { margin-top: 10px; text-align: center; position: relative; z-index: 2; }
+.diagnosis-meter__label-eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--color-text-tertiary); font-weight: 700; }
+.diagnosis-meter__label-value { margin-top: 4px; font-size: 13px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: var(--color-warn); }
+
+.diagnosis-card {
+  margin-top: 24px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.diagnosis-card__header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 20px;
+  background: var(--color-brand2-800);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+.diagnosis-card__avatar {
+  width: 48px; height: 48px; border-radius: 50%; overflow: hidden;
+  background: var(--color-brand1-1800);
+  color: var(--color-white);
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.diagnosis-card__avatar svg { width: 22px; height: 22px; }
+.diagnosis-card__title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-tertiary); margin-bottom: 2px; }
+.diagnosis-card__diagnosis { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; color: var(--color-text-primary); }
+.diagnosis-card__diagnosis em { font-family: var(--font-accent); font-style: italic; font-weight: 700; color: var(--color-brand1-1800); }
+.diagnosis-card__rows { padding: 8px 20px; }
+.diagnosis-card__row {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 12px 0; border-bottom: 1px dashed var(--color-border-subtle); font-size: 13.5px;
+}
+.diagnosis-card__row:last-child { border-bottom: 0; }
+.diagnosis-card__row-key { color: var(--color-text-tertiary); font-weight: 500; }
+.diagnosis-card__row-val { color: var(--color-text-primary); font-weight: 700; text-align: right; }
+.diagnosis-card__row-val small { display: block; font-weight: 400; color: var(--color-text-tertiary); font-size: 11px; font-style: italic; margin-top: 2px; }
+.diagnosis-card__row-val--good { color: var(--color-accent-dark); }
+.diagnosis-copy { margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+.diagnosis-copy p { font-size: 15px; line-height: 1.65; color: var(--color-text-secondary); }
+.diagnosis-copy strong { color: var(--color-text-primary); font-weight: 700; }
+
+/* ============================================
+   SCREEN 15: PROJECTION CHART
+   ============================================ */
+.projection-card {
+  margin-top: 24px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px 20px;
+  box-shadow: var(--shadow-lg);
+}
+.projection-chart { width: 100%; height: 200px; display: block; overflow: visible; }
+.projection-axis { margin-top: 8px; display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; color: var(--color-text-tertiary); letter-spacing: 0.5px; }
+.projection-pill {
+  display: inline-block; margin-top: 18px; padding: 8px 14px;
+  background: var(--color-brand2-800); border-radius: 9999px;
+  font-size: 13px; font-weight: 600; color: var(--color-text-primary);
+}
+.projection-pill strong { color: var(--color-brand1-1800); font-weight: 800; }
+
+/* ============================================
+   SCREEN 16: PRE-LANDING
+   ============================================ */
+.prelanding { display: flex; flex-direction: column; gap: 18px; margin-bottom: 24px; }
+.prelanding__media {
+  width: 100%; aspect-ratio: 1 / 1;
+  background: var(--color-brand2-800);
+  border-radius: var(--radius-lg); overflow: hidden;
+}
+.prelanding__media img { width: 100%; height: 100%; object-fit: contain; }
+.prelanding__features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.prelanding__feature {
+  background: var(--color-white);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  box-shadow: var(--shadow-lg);
+}
+.prelanding__feature-icon {
+  flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
+  background: var(--color-brand1-400); color: var(--color-brand1-1800);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.prelanding__feature-title { font-size: 13.5px; font-weight: 700; color: var(--color-text-primary); line-height: 1.3; }
+@media (max-width: 380px) { .prelanding__features { grid-template-columns: 1fr; } }
+
+.prelanding-guarantee {
+  margin: 24px 0 28px;
+  background: var(--color-brand2-800);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.prelanding-guarantee__icon {
+  flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+  background: var(--color-brand1-1800); color: var(--color-white);
+  display: inline-flex; align-items: center; justify-content: center; margin-top: 1px;
+}
+.prelanding-guarantee__text { font-size: 13.5px; line-height: 1.55; color: var(--color-text-secondary); }
+.prelanding-guarantee__text strong { color: var(--color-text-primary); font-weight: 700; }
+
+/* ============================================
+   SCREEN 17: SALES PAGE (the close)
+   ============================================ */
+.sale-shell { max-width: 680px; margin: 0 auto; padding: 32px 24px 120px; }
+@media (max-width: 640px) { .sale-shell { padding: 24px 16px 96px; } }
+
+.sale-eyebrow {
+  display: inline-block; padding: 6px 14px;
+  background: var(--color-brand1-400); color: var(--color-brand1-1800);
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+  border-radius: 9999px; margin-bottom: 14px;
+}
+.sale-headline {
+  font-family: var(--font-heading);
+  font-size: 34px; line-height: 1.15; font-weight: 700; letter-spacing: 0;
+  color: var(--color-text-primary); margin-bottom: 10px;
+}
+.sale-headline em { font-family: var(--font-accent); font-style: italic; font-weight: 700; color: var(--color-brand1-1800); }
+.sale-subhead { font-size: 16px; font-weight: 500; color: var(--color-text-secondary); line-height: 1.55; margin-bottom: 14px; }
+.sale-trust { font-size: 12.5px; color: var(--color-text-tertiary); margin-bottom: 28px; display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+@media (max-width: 640px) { .sale-headline { font-size: 28px; } .sale-subhead { font-size: 15px; } }
+
+.sale-hero { display: grid; grid-template-columns: 280px 1fr; gap: 28px; align-items: center; margin-bottom: 32px; }
+.sale-hero__media { aspect-ratio: 1 / 1; background: var(--color-brand2-800); border-radius: var(--radius-lg); overflow: hidden; }
+.sale-hero__media img { width: 100%; height: 100%; object-fit: contain; }
+.sale-hero__price { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
+.sale-hero__price-current { font-family: var(--font-heading); font-size: 38px; font-weight: 700; color: var(--color-text-primary); }
+.sale-hero__price-compare { font-size: 18px; color: var(--color-text-tertiary); text-decoration: line-through; text-decoration-thickness: 2px; font-weight: 500; }
+.sale-hero__price-save { display: inline-block; padding: 4px 10px; background: var(--color-brand1-1800); color: var(--color-white); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 9999px; }
+.sale-hero__ticker { font-size: 12.5px; color: var(--color-text-tertiary); margin-bottom: 18px; }
+@media (max-width: 640px) {
+  .sale-hero { grid-template-columns: 1fr; gap: 18px; }
+  .sale-hero__media { max-width: 260px; margin: 0 auto; }
+  .sale-hero__price-current { font-size: 32px; }
+}
+
+.sale-section-title { font-family: var(--font-heading); font-size: 22px; font-weight: 700; color: var(--color-text-primary); margin: 36px 0 16px; }
+
+.sale-bullets { margin: 20px 0; display: flex; flex-direction: column; gap: 12px; }
+.sale-bullet { display: flex; align-items: flex-start; gap: 12px; font-size: 14.5px; line-height: 1.5; color: var(--color-text-secondary); }
+.sale-bullet__icon { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--color-brand1-1800); color: var(--color-white); display: inline-flex; align-items: center; justify-content: center; margin-top: 2px; }
+
+.sale-steps { margin: 20px 0; display: flex; flex-direction: column; gap: 10px; }
+.sale-step {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-lg);
+}
+.sale-step__num {
+  flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--color-brand1-400); color: var(--color-brand1-1800);
+  font-family: var(--font-heading); font-weight: 700; font-size: 15px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.sale-step__name { font-size: 14.5px; font-weight: 700; color: var(--color-text-primary); }
+.sale-step__desc { font-size: 13px; color: var(--color-text-secondary); }
+
+.sale-gift {
+  margin: 24px 0; padding: 18px 20px;
+  background: var(--color-brand3-1800);
+  border-radius: var(--radius-lg);
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.sale-gift__icon { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--color-brand3-3200); color: var(--color-brand3-1800); display: inline-flex; align-items: center; justify-content: center; }
+.sale-gift__title { font-size: 14px; font-weight: 700; color: var(--color-brand3-3200); margin-bottom: 2px; }
+.sale-gift__text { font-size: 13px; line-height: 1.5; color: var(--color-brand3-3200); }
+
+.sale-cta-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-top: 24px;
+  box-shadow: var(--shadow-xl);
+}
+.sale-scarcity { font-size: 12.5px; color: var(--color-text-tertiary); margin-top: 12px; text-align: center; letter-spacing: 0.3px; }
+
+.sale-guarantee {
+  margin-top: 28px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  display: flex; align-items: center; gap: 14px;
+}
+.sale-guarantee__icon { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--color-brand1-1800); color: var(--color-white); display: inline-flex; align-items: center; justify-content: center; margin-top: 1px; }
+.sale-guarantee__text { font-size: 13.5px; line-height: 1.55; color: var(--color-text-secondary); }
+.sale-guarantee__text strong { color: var(--color-text-primary); font-weight: 700; }
+
+.sale-endorse { margin-top: 32px; }
+.sale-endorse__label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-tertiary); margin-bottom: 14px; }
+.sale-endorse__list { display: flex; flex-direction: column; gap: 12px; }
+.sale-endorse__item { background: var(--color-white); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); padding: 14px 16px; box-shadow: var(--shadow-lg); }
+.sale-endorse__quote { font-size: 13.5px; line-height: 1.55; color: var(--color-text-secondary); font-style: italic; }
+.sale-endorse__name { margin-top: 8px; font-size: 12.5px; font-weight: 700; color: var(--color-text-primary); }
+.sale-endorse__handle { font-weight: 500; color: var(--color-brand1-1800); font-style: normal; }
+
+/* Customer reviews (screen 17) */
+.sale-reviews { margin-top: 32px; }
+.sale-review { display: flex; gap: 12px; padding: 16px 0; border-bottom: 1px dashed var(--color-border-subtle); }
+.sale-review:last-child { border-bottom: 0; }
+.sale-review__avatar { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--color-brand2-1800); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: var(--color-text-secondary); }
+.sale-review__body { flex: 1; min-width: 0; }
+.sale-review__stars { display: inline-flex; gap: 1px; color: var(--color-star); margin-bottom: 2px; }
+.sale-review__name { font-size: 13px; font-weight: 700; color: var(--color-text-primary); }
+.sale-review__verified { font-size: 9.5px; font-weight: 700; color: var(--color-accent-dark); text-transform: uppercase; letter-spacing: 0.5px; margin-left: 6px; }
+.sale-review__head { font-weight: 700; color: var(--color-text-primary); }
+.sale-review__text { font-size: 13px; line-height: 1.55; color: var(--color-text-secondary); margin-top: 4px; }
+
+.sale-footer-pay { margin-top: 36px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; color: var(--color-text-tertiary); font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
+
+/* ============================================
+   FOOTER MICROCOPY
+   ============================================ */
+.quiz-foot {
+  margin-top: 28px;
+  display: inline-flex; align-items: center; gap: 6px;
+  width: 100%; justify-content: center; text-align: center;
+  font-size: 11px; color: var(--color-text-tertiary);
+}
+.quiz-foot__lock { display: inline-flex; align-items: center; justify-content: center; color: var(--color-brand1-1800); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .step, .topbar__progress-fill, .loader__bar-fill, .checklist__row, .btn-cta__spinner, .meter-needle {
+    animation-duration: 0.01ms !important; transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="quiz-app" x-data="quiz()" x-cloak x-init="init()">
+
+  <!-- ===== TOP BAR ===== -->
+  <header class="topbar" x-show="step <= 17" x-transition.opacity>
+    <div class="topbar__inner">
+      <a href="/" class="topbar__logo" aria-label="Merwave home">
+        <img src="assets/logo.png" alt="Merwave" data-no-skeleton>
+      </a>
+      <div class="topbar__progress" role="progressbar" :aria-valuenow="progress()" aria-valuemin="0" aria-valuemax="100">
+        <div class="topbar__progress-fill" :style="`width: ${progress()}%`"></div>
+      </div>
+      <div class="topbar__count"><span x-text="Math.min(step, 17)"></span> / 17</div>
+    </div>
+  </header>
+
+  <!-- ============================================
+       SCREENS 1 – 16 SHELL
+       ============================================ -->
+  <main class="quiz-shell" x-show="step <= 16">
+
+    <!-- ===== SCREEN 1: HAIR TYPE SELF-ID ===== -->
+    <section class="step" x-show="step === 1" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="step__eyebrow">A 2-minute hair analysis</div>
+      <h1 class="step__title">Is your hair actually curly? Take the 2-minute hair analysis.</h1>
+      <p class="step__subtitle step__subtitle--inline-icon">
+        <span class="step__subtitle-icon" aria-hidden="true">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span>Answer a few questions about how your hair really behaves, and we'll tell you what type your hair actually is — and the routine built for it.</span>
+      </p>
+
+      <h2 class="step__question">Which of these sounds most like your hair?</h2>
+      <div class="options">
+        <template x-for="opt in [
+          'Curly — but it never behaves the way curly hair is supposed to',
+          'Curly one day, flat the next',
+          'Frizzy and puffy more than anything',
+          'I\'ve given up trying to label it'
+        ]" :key="opt">
+          <button class="option" :class="{ 'option--selected': answers.hairType === opt }" @click="select('hairType', opt)">
+            <span class="option__label" x-text="opt"></span>
+            <span class="option__check" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+          </button>
+        </template>
+      </div>
+
+      <div class="proof-quote">
+        <div class="proof-quote__avatar proof-quote__avatar--initial" aria-hidden="true">D</div>
+        <p class="proof-quote__text">
+          "I knew I had wavy/curly hair but fought against it for years, constantly straightening it. My waves never stayed all day — my hair became a mess by lunchtime. Merwave changed that."
+          <span class="proof-quote__name">Dawn H. · Verified customer</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 2: PRIMARY CONCERN ===== -->
+    <section class="step" x-show="step === 2" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="step__eyebrow">Screen 2 of 17</div>
+      <h2 class="step__question">What's the single most frustrating thing about your hair right now?</h2>
+      <div class="options">
+        <template x-for="opt in [
+          { value: 'flat-lunch',  label: 'My curls fall flat by lunchtime', emoji: '🕛' },
+          { value: 'greasy',      label: 'It goes greasy and stringy a day after washing', emoji: '💧' },
+          { value: 'wont-hold',   label: 'I pile on product and it still won\'t hold', emoji: '🧴' },
+          { value: 'drops-dry',   label: 'It looks amazing wet, then drops the second it dries', emoji: '🌊' },
+          { value: 'lifeless',    label: 'It\'s just flat and lifeless, whatever I do', emoji: '😔' }
+        ]" :key="opt.value">
+          <button class="option" :class="{ 'option--selected': answers.concern === opt.value }" @click="select('concern', opt.value)">
+            <span class="option__icon"><span class="option__icon-emoji" x-text="opt.emoji"></span></span>
+            <span class="option__label" x-text="opt.label"></span>
+            <span class="option__check" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+          </button>
+        </template>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 3: SYMPTOM RECOGNITION ===== -->
+    <section class="step" x-show="step === 3" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="step__eyebrow">Screen 3 of 17</div>
+      <h2 class="step__question">When your hair dries, do the curls or waves go limp and lose their shape?</h2>
+      <div class="options">
+        <template x-for="opt in ['Yes — every single time', 'Sometimes, depends on the day', 'No, they hold fine']" :key="opt">
+          <button class="option" :class="{ 'option--selected': answers.symptom === opt }" @click="select('symptom', opt)">
+            <span class="option__label" x-text="opt"></span>
+            <span class="option__check" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+          </button>
+        </template>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 4: SEVERITY (visual scale) ===== -->
+    <section class="step" x-show="step === 4" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="step__eyebrow">Screen 4 of 17</div>
+      <h2 class="step__question">By the end of the day, how much of your hair's shape is left?</h2>
+      <div class="options">
+        <template x-for="opt in [
+          { value: 'none',    label: 'Basically none — flat and stuck to my head', amp: 1 },
+          { value: 'quarter', label: 'About a quarter — the rest has dropped',     amp: 3 },
+          { value: 'half',    label: 'Around half holds',                          amp: 6 },
+          { value: 'most',    label: 'Most of it stays put',                       amp: 9 }
+        ]" :key="opt.value">
+          <button class="option" :class="{ 'option--selected': answers.severity === opt.value }" @click="select('severity', opt.value)">
+            <span class="option__icon" style="background:transparent; width:44px;">
+              <span class="scale-vis">
+                <svg viewBox="0 0 44 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                  <path :d="`M2 12 Q 8 ${12 - opt.amp} 14 12 T 26 12 T 38 12`"></path>
+                </svg>
+              </span>
+            </span>
+            <span class="option__label" x-text="opt.label"></span>
+            <span class="option__check" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+          </button>
+        </template>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 5: DURATION ===== -->
+    <section class="step" x-show="step === 5" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="step__eyebrow">Screen 5 of 17</div>
+      <h2 class="step__question">How long have you been calling your hair "curly" and fighting to make it behave?</h2>
+      <div class="options">
+        <template x-for="opt in ['Less than a year', '1–3 years', '3–5 years', 'As long as I can remember']" :key="opt">
+          <button class="option" :class="{ 'option--selected': answers.duration === opt }" @click="select('duration', opt)">
+            <span class="option__label" x-text="opt"></span>
+            <span class="option__check" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+          </button>
+        </template>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 6: DESIRED OUTCOME (multi) ===== -->
+    <section class="step" x-show="step === 6" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="step__eyebrow">Screen 6 of 17</div>
+      <h1 class="step__title">If your hair finally cooperated, what would you want <em>from it?</em></h1>
+      <p class="step__question-helper" style="margin-top: -4px; margin-bottom: 18px;">Pick everything that applies.</p>
+      <div class="options">
+        <template x-for="opt in [
+          { value: 'defined-lasts', label: 'Soft, defined waves that actually last the day', emoji: '🌊' },
+          { value: 'no-grease',     label: 'No more grease or weighed-down, stringy roots', emoji: '✨' },
+          { value: 'quick',         label: 'A routine that takes minutes, not a whole evening', emoji: '⏱️' },
+          { value: 'effortless',    label: 'Hair that looks effortless, like I just woke up like this', emoji: '😌' },
+          { value: 'stop-buying',   label: 'To stop buying product after product that never works', emoji: '🛑' }
+        ]" :key="opt.value">
+          <button class="option option--multi" :class="{ 'option--selected': answers.desired.includes(opt.value) }" @click="toggle('desired', opt.value)">
+            <span class="option__icon"><span class="option__icon-emoji" x-text="opt.emoji"></span></span>
+            <span class="option__label" x-text="opt.label"></span>
+            <span class="option__check" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+          </button>
+        </template>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 7: VALIDATION INTERSTITIAL ===== -->
+    <section class="step" x-show="step === 7" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="step__eyebrow">A quick pause</div>
+      <h1 class="step__title">You're not bad at <em>curly hair.</em></h1>
+      <div class="step__subtitle step__subtitle--stacked">
+        <p>Most women fighting "difficult curls" don't have curly hair at all — they're wavy, and wavy hair behaves nothing like curly hair. 47% never find out.<!-- [confirm stat — Merwave's own figure] --></p>
+        <p><strong style="color: var(--color-text-primary);">Your results will show which one you are.</strong></p>
+      </div>
+
+      <figure class="beforeafter beforeafter--single">
+        <img src="assets/before-after.webp" alt="Before and after — flat, weighed-down hair becomes soft defined waves">
+      </figure>
+
+      <p class="step__subtitle" style="margin-top: 18px; margin-bottom: 0; font-size: 14px; color: var(--color-text-tertiary);">
+        <strong style="color: var(--color-text-secondary);">5,409</strong> reviews · ★4.5<!-- [confirm — pulled from Merwave's live review widget] -->
+      </p>
+    </section>
+
+    <!-- ===== SCREEN 8: STRAND TYPE ===== -->
+    <section class="step" x-show="step === 8" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="step__eyebrow">Screen 8 of 17</div>
+      <h2 class="step__question">How would you describe the actual strands of your hair?</h2>
+      <div class="options">
+        <template x-for="opt in [
+          { value: 'fine',   label: 'Fine — thin strands, usually a lot of them', emoji: '〰️' },
+          { value: 'medium', label: 'Medium', emoji: '🌀' },
+          { value: 'thick',  label: 'Thick and coarse', emoji: '🧶' },
+          { value: 'unsure', label: 'Not sure', emoji: '🤔' }
+        ]" :key="opt.value">
+          <button class="option" :class="{ 'option--selected': answers.strandType === opt.value }" @click="select('strandType', opt.value)">
+            <span class="option__icon"><span class="option__icon-emoji" x-text="opt.emoji"></span></span>
+            <span class="option__label" x-text="opt.label"></span>
+            <span class="option__check" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+          </button>
+        </template>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 9: PRODUCT LOAD ===== -->
+    <section class="step" x-show="step === 9" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="step__eyebrow">Screen 9 of 17</div>
+      <h2 class="step__question">On a wash day, how many products go into your hair?</h2>
+      <div class="options">
+        <template x-for="opt in [
+          { value: '1-2',   label: '1–2', emoji: '🧴' },
+          { value: '3-4',   label: '3–4', emoji: '🧴' },
+          { value: '5plus', label: '5 or more', emoji: '🧴' },
+          { value: 'lost',  label: 'I\'ve genuinely lost count', emoji: '🤯' }
+        ]" :key="opt.value">
+          <button class="option" :class="{ 'option--selected': answers.productLoad === opt.value }" @click="select('productLoad', opt.value)">
+            <span class="option__icon"><span class="option__icon-emoji" x-text="opt.emoji"></span></span>
+            <span class="option__label" x-text="opt.label"></span>
+            <span class="option__check" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+          </button>
+        </template>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 10: LOADER 1 ===== -->
+    <section class="step" x-show="step === 10" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="loader">
+        <h2 class="loader__title">Analysing how your hair behaves…</h2>
+        <p class="loader__subtitle">Matching your answers against thousands of wavy and curly hair profiles to find your real hair type.</p>
+        <div class="loader__bar"><div class="loader__bar-fill" :style="`width: ${loaderPct}%`"></div></div>
+        <div class="loader__pct"><span x-text="loaderPct"></span>%</div>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 11: WHAT SHE'S TRIED (multi + why-box) ===== -->
+    <section class="step" x-show="step === 11" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="step__eyebrow">Screen 11 of 17</div>
+      <h2 class="step__question">Which of these have you tried to fix your hair?</h2>
+      <p class="step__question-helper">Choose everything that applies.</p>
+      <div class="options">
+        <template x-for="opt in [
+          { value: 'cgm',     label: 'The Curly Girl Method', emoji: '📋' },
+          { value: 'creams',  label: 'Heavy curl creams and butters', emoji: '🧈' },
+          { value: 'oils',    label: 'Oils and leave-in masks', emoji: '🫗' },
+          { value: 'gels',    label: 'Strong-hold gels and mousses', emoji: '🌫️' },
+          { value: 'all',     label: 'All of the above, if I\'m honest', emoji: '🙈' }
+        ]" :key="opt.value">
+          <button class="option option--multi" :class="{ 'option--selected': answers.tried.includes(opt.value) }" @click="toggle('tried', opt.value)">
+            <span class="option__icon"><span class="option__icon-emoji" x-text="opt.emoji"></span></span>
+            <span class="option__label" x-text="opt.label"></span>
+            <span class="option__check" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+          </button>
+        </template>
+      </div>
+
+      <div class="why-box">
+        <span class="why-box__icon">i</span>
+        <div>
+          <div class="why-box__title">Why we ask</div>
+          <p class="why-box__text">Almost every "curly" product is built for thick, coily hair that drinks up heavy butters and oils. On finer wavy strands, that same weight does the opposite — it drags the wave down until it falls flat and turns greasy. Knowing what you've used tells us exactly what's been weighing you down.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 12: WET VS DRY (single + why-box) ===== -->
+    <section class="step" x-show="step === 12" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="step__eyebrow">Screen 12 of 17</div>
+      <h2 class="step__question">Straight out of the shower, how does your hair look while it's still wet?</h2>
+      <div class="options">
+        <template x-for="opt in [
+          'Gorgeous — defined and exactly what I want',
+          'Good, but it changes as it dries',
+          'Already a bit flat, even wet'
+        ]" :key="opt">
+          <button class="option" :class="{ 'option--selected': answers.wetDry === opt }" @click="answers.wetDry = opt">
+            <span class="option__label" x-text="opt"></span>
+            <span class="option__check" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+          </button>
+        </template>
+      </div>
+
+      <div class="why-box">
+        <span class="why-box__icon">i</span>
+        <div>
+          <div class="why-box__title">Why we ask</div>
+          <p class="why-box__text">Defined when wet, then flat and stringy as it dries is the signature of wavy hair carrying too much product weight. The shape is already there — it's being pulled flat by formulas your strands were never built to hold.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 13: LOADER 2 (checklist) ===== -->
+    <section class="step" x-show="step === 13" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="loader">
+        <h2 class="loader__title">Finalising your hair analysis…</h2>
+        <ul class="checklist">
+          <template x-for="(row, idx) in [
+            { label: 'Mapping your wave pattern' },
+            { label: 'Comparing curly vs wavy markers' },
+            { label: 'Pinpointing what\'s weighing your hair down' },
+            { label: 'Almost there…' }
+          ]" :key="row.label">
+            <li class="checklist__row"
+                x-show="loaderPhase >= idx"
+                x-transition:enter="checklist-enter"
+                x-transition:enter-start="checklist-enter-start"
+                x-transition:enter-end="checklist-enter-end"
+                :class="{ 'is-done': loaderPhase > idx, 'is-spinning': loaderPhase === idx }">
+              <span class="checklist__row-icon">
+                <template x-if="loaderPhase > idx">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </template>
+              </span>
+              <span class="checklist__row-text" x-text="row.label"></span>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== SCREEN 14: DIAGNOSIS (the aha) ===== -->
+    <section class="step" x-show="step === 14" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="step__eyebrow">Your result</div>
+      <h1 class="step__title">You're not curly. <em>You're wavy.</em></h1>
+      <p class="step__subtitle" style="margin-bottom: 24px;">Wave expression — currently suppressed</p>
+
+      <div class="diagnosis-meter">
+        <template x-if="step === 14">
+          <svg class="diagnosis-meter__svg" viewBox="0 0 200 110" aria-hidden="true">
+            <defs>
+              <linearGradient id="meterGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"   stop-color="#F04438"/>
+                <stop offset="40%"  stop-color="#F79009"/>
+                <stop offset="70%"  stop-color="#FEC84B"/>
+                <stop offset="100%" stop-color="#12B76A"/>
+              </linearGradient>
+            </defs>
+            <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#EAE9DF" stroke-width="12"/>
+            <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#meterGrad)" stroke-width="12"/>
+            <g class="meter-needle">
+              <line x1="100" y1="100" x2="100" y2="28" stroke="#3D3D3D" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="100" cy="100" r="7" fill="#3D3D3D"/>
+              <circle cx="100" cy="100" r="2.5" fill="#FFFFFF"/>
+            </g>
+          </svg>
+        </template>
+        <div class="diagnosis-meter__label">
+          <div class="diagnosis-meter__label-eyebrow">Current expression</div>
+          <div class="diagnosis-meter__label-value">Low — Suppressed</div>
+        </div>
+      </div>
+
+      <div class="diagnosis-card">
+        <div class="diagnosis-card__header">
+          <div class="diagnosis-card__avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2-4 5-4 7 0s5 4 7 0 5-4 6 0"/></svg>
+          </div>
+          <div>
+            <div class="diagnosis-card__title">Your hair profile</div>
+            <div class="diagnosis-card__diagnosis">Your hair isn't curly. It's <em>wavy, Type 2</em> — and it's been weighed down this whole time.</div>
+          </div>
+        </div>
+        <div class="diagnosis-card__rows">
+          <div class="diagnosis-card__row">
+            <span class="diagnosis-card__row-key">Hair type</span>
+            <span class="diagnosis-card__row-val">Wavy (Type 2)</span>
+          </div>
+          <div class="diagnosis-card__row">
+            <span class="diagnosis-card__row-key">What went wrong</span>
+            <span class="diagnosis-card__row-val">Curl-weight products<small>on fine wavy strands</small></span>
+          </div>
+          <div class="diagnosis-card__row">
+            <span class="diagnosis-card__row-key">Wave potential</span>
+            <span class="diagnosis-card__row-val diagnosis-card__row-val--good">HIGH<small>currently suppressed</small></span>
+          </div>
+          <div class="diagnosis-card__row">
+            <span class="diagnosis-card__row-key">Room for improvement</span>
+            <span class="diagnosis-card__row-val diagnosis-card__row-val--good">HIGH</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="diagnosis-copy">
+        <p>Fine strands, shape that looks great wet then drops flat and greasy as it dries, and years of heavy curly products that never held — <strong>your hair isn't curly. It's wavy, Type 2,</strong> and it's been weighed down this whole time.</p>
+        <p>Here's the part no one told you: <strong>your wave pattern is still there. It's just being suppressed</strong> by formulas your strands were never built to carry.</p>
+      </div>
+      <!-- [Flag for compliance review — wellness positioning, not a medical claim.] -->
+    </section>
+
+    <!-- ===== SCREEN 15: PROJECTION ===== -->
+    <section class="step" x-show="step === 15" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="step__eyebrow">Your projection</div>
+      <h1 class="step__title">Here's what your hair does once the <em>weight comes off.</em></h1>
+      <p class="step__subtitle">From your very first wash, your waves start coming back. Based on your answers, expect soft, defined, frizz-free waves that hold all day by <strong style="color: var(--color-text-primary);" x-text="projectedDate">Tuesday, August 4, 2026</strong>.<!-- ~8 weeks [confirm] --></p>
+
+      <div class="projection-card">
+        <svg class="projection-chart" viewBox="0 0 320 200" aria-hidden="true">
+          <defs>
+            <linearGradient id="chartGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#86A6C9"/>
+              <stop offset="100%" stop-color="#12B76A"/>
+            </linearGradient>
+            <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#86A6C9" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#86A6C9" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <line x1="0" y1="40"  x2="320" y2="40"  stroke="#EAE9DF" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="0" y1="100" x2="320" y2="100" stroke="#EAE9DF" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="0" y1="160" x2="320" y2="160" stroke="#EAE9DF" stroke-width="1" stroke-dasharray="3,3"/>
+          <path d="M 10 170 C 70 168, 95 140, 130 120 S 240 30, 310 24" fill="none" stroke="none"/>
+          <path d="M 10 170 C 70 168, 95 140, 130 120 S 240 30, 310 24 L 310 180 L 10 180 Z" fill="url(#chartFill)"/>
+          <path d="M 10 170 C 70 168, 95 140, 130 120 S 240 30, 310 24" fill="none" stroke="url(#chartGrad)" stroke-width="3" stroke-linecap="round"/>
+          <!-- start dot: you are here -->
+          <circle cx="10" cy="170" r="6" fill="#FFFFFF" stroke="#3D3D3D" stroke-width="2"/>
+          <!-- wash 1 marker -->
+          <circle cx="70" cy="168" r="5" fill="#86A6C9" stroke="#FFFFFF" stroke-width="2"/>
+          <!-- end dot -->
+          <circle cx="310" cy="24" r="7" fill="#12B76A" stroke="#FFFFFF" stroke-width="2.5"/>
+          <circle cx="310" cy="24" r="14" fill="none" stroke="#12B76A" stroke-opacity="0.18" stroke-width="3"/>
+          <g transform="translate(16, 150)">
+            <rect x="0" y="0" rx="6" ry="6" width="110" height="22" fill="#3D3D3D"/>
+            <text x="55" y="15" fill="#FFFFFF" font-size="9.5" font-weight="700" font-family="sans-serif" text-anchor="middle">YOU ARE HERE</text>
+          </g>
+          <g transform="translate(60, 130)">
+            <rect x="0" y="0" rx="6" ry="6" width="140" height="20" fill="#86A6C9"/>
+            <text x="70" y="14" fill="#FFFFFF" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle">WASH 1 — WAVES RETURN</text>
+          </g>
+          <g transform="translate(196, 0)">
+            <rect x="0" y="0" rx="8" ry="8" width="120" height="28" fill="#12B76A"/>
+            <text x="60" y="18" fill="#FFFFFF" font-size="10.5" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.5">WAVES THAT LAST</text>
+          </g>
+        </svg>
+        <div class="projection-axis">
+          <span>Today</span>
+          <span>Wash 1</span>
+          <span x-text="projectedDate">~8 weeks</span>
+        </div>
+        <span class="projection-pill">Defined waves that hold all day by <strong x-text="projectedDate">~8 weeks</strong></span>
+      </div>
+
+      <div class="diagnosis-copy" style="margin-top: 24px;">
+        <p>The shape is already there. Once the weight comes off, <strong>your waves stop being dragged flat</strong> and start holding the way they were always meant to.</p>
+        <p>Most women see a difference from the very first wash. The full transformation builds over the weeks that follow.</p>
+      </div>
+      <!-- [Flag for compliance review.] -->
+    </section>
+
+    <!-- ===== SCREEN 16: QUALIFICATION PRE-LANDING ===== -->
+    <section class="step" x-show="step === 16" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
+      <div class="step__eyebrow">Recommended for your profile</div>
+      <h1 class="step__title">Because your hair is wavy, there's exactly <em>one routine</em> built for it.</h1>
+      <p class="step__subtitle">The Merwave Wavy Hair Starter Kit is made for fine, wavy (Type 2) hair — lightweight formulas that define your waves without the weight that's been flattening them. Because you qualify, it's covered by our 90-day money-back guarantee<!-- [confirm terms] -->: defined waves, or your money back.</p>
+
+      <div class="prelanding">
+        <div class="prelanding__media"><img src="product-kit.png" alt="Merwave Wavy Hair Starter Kit"></div>
+        <div class="prelanding__features">
+          <div class="prelanding__feature">
+            <div class="prelanding__feature-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2-4 5-4 7 0s5 4 7 0 5-4 6 0"/></svg>
+            </div>
+            <div class="prelanding__feature-title">Defines waves in one wash</div>
+          </div>
+          <div class="prelanding__feature">
+            <div class="prelanding__feature-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </div>
+            <div class="prelanding__feature-title">Won't weigh hair down</div>
+          </div>
+          <div class="prelanding__feature">
+            <div class="prelanding__feature-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
+            </div>
+            <div class="prelanding__feature-title">15-minute routine</div>
+          </div>
+          <div class="prelanding__feature">
+            <div class="prelanding__feature-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/></svg>
+            </div>
+            <div class="prelanding__feature-title">Frizz-free for days</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prelanding-guarantee">
+        <span class="prelanding-guarantee__icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </span>
+        <p class="prelanding-guarantee__text"><strong>47% of women never realise their hair is wavy.</strong><!-- [confirm stat] --> You just did — and that's exactly why this kit is built for you.</p>
+      </div>
+    </section>
+
+    <p class="quiz-foot" x-show="step >= 1 && step <= 16">
+      <span class="quiz-foot__lock" aria-hidden="true">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 9V7a5 5 0 0 0-10 0v2H5a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1h-2zM9 7a3 3 0 0 1 6 0v2H9V7zm4 9.7V19h-2v-2.3a1.5 1.5 0 1 1 2 0z"/></svg>
+      </span>
+      <span>Your answers are private. We don't share or store them beyond this session.</span>
+    </p>
+
+  </main>
+
+  <!-- ===== STICKY STEP NAV (screens 6,7,11,12,14,15,16) ===== -->
+  <nav class="step-nav" x-show="step <= 16 && (showBack() || showContinue())" x-transition.opacity>
+    <div class="step-nav__inner">
+      <button class="btn-back" @click="back()" x-show="showBack()" :style="showBack() ? '' : 'visibility: hidden'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <button class="btn-cta"
+              :class="{ 'btn-cta--xl': step === 14 || step === 16 }"
+              x-show="showContinue()"
+              :disabled="!canContinue()"
+              @click="continueAction($el)">
+        <span class="btn-cta__content">
+          <span x-text="continueLabel()">Continue</span>
+          <span class="btn-cta__arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       SCREEN 17: SALES PAGE (the close)
+       ============================================ -->
+  <main class="sale-shell" x-show="step === 17" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end">
+    <span class="sale-eyebrow">£20 off today</span>
+    <h1 class="sale-headline">Your Wavy Hair Starter Kit — <em>£20 off today</em></h1>
+    <p class="sale-subhead">Everything your waves have been missing, in one 5-step system.</p>
+    <p class="sale-trust">
+      ★4.5 from 5,409 reviews<!-- [confirm — from Merwave's live review widget] -->
+    </p>
+
+    <div class="sale-hero">
+      <div class="sale-hero__media"><img src="product-kit.png" alt="Merwave Wavy Hair Starter Kit"></div>
+      <div>
+        <div class="sale-hero__price">
+          <span class="sale-hero__price-current" data-price-current>£65</span>
+          <span class="sale-hero__price-compare" data-price-compare>£85</span>
+          <span class="sale-hero__price-save" data-price-save>Save £20</span>
+        </div>
+        <p class="sale-hero__ticker">Around a 90-day supply — roughly <span data-price-perday>72p</span> a day for waves that finally hold.</p>
+      </div>
+    </div>
+
+    <h2 class="sale-section-title">Why this kit, when nothing else worked</h2>
+    <ul class="sale-bullets">
+      <template x-for="b in [
+        'Five lightweight products made for wavy hair, not curly — so nothing drags your waves flat',
+        'Defines your natural waves from the very first wash',
+        'Leaves roots clean and light instead of greasy and weighed down',
+        'A 15-minute routine that replaces the 5-product evening you\'ve been doing',
+        'Cruelty-free and colour-safe'
+      ]" :key="b">
+        <li class="sale-bullet">
+          <span class="sale-bullet__icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span x-text="b"></span>
+        </li>
+      </template>
+    </ul>
+
+    <h2 class="sale-section-title">Your 5 steps</h2>
+    <div class="sale-steps">
+      <template x-for="(s, i) in [
+        { name: 'Cleanse Shampoo', desc: 'Washes without stripping' },
+        { name: 'Repair Conditioner', desc: 'Hydrates and detangles' },
+        { name: 'Wave Cream', desc: 'Defines the wave and cuts frizz' },
+        { name: 'Cast Foam', desc: 'Builds shape and hold' },
+        { name: 'Protect Gel', desc: 'Locks the waves in as they dry' }
+      ]" :key="s.name">
+        <div class="sale-step">
+          <span class="sale-step__num" x-text="i + 1"></span>
+          <div>
+            <div class="sale-step__name" x-text="s.name"></div>
+            <div class="sale-step__desc" x-text="s.desc"></div>
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <div class="sale-gift">
+      <span class="sale-gift__icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+      </span>
+      <div>
+        <div class="sale-gift__title">Free gift — Refresh Spray (worth £17)</div>
+        <p class="sale-gift__text">Comes with your kit. Revives your waves between washes, no full restyle needed.</p>
+      </div>
+    </div>
+
+    <div class="sale-cta-card">
+      <button class="btn-cta btn-cta--full btn-cta--xl" id="quizCheckoutBtn" @click="checkout($el)">
+        <span class="btn-cta__content">
+          <span data-cta-price>Bring my waves back — £65</span>
+          <span class="btn-cta__arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </span>
+        <span class="btn-cta__loading" aria-hidden="true">
+          <span class="btn-cta__spinner"></span>
+          <span>Securing your kit…</span>
+        </span>
+      </button>
+      <p class="sale-scarcity">Free UK delivery · Secure checkout<!-- [confirm real scarcity mechanism before launch — avoid fake countdown] --></p>
+    </div>
+
+    <div class="sale-guarantee">
+      <span class="sale-guarantee__icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </span>
+      <p class="sale-guarantee__text"><strong>90-day money-back guarantee.</strong><!-- [confirm] --> If your waves don't come back, you don't pay.</p>
+    </div>
+
+    <div class="sale-reviews">
+      <h2 class="sale-section-title">What customers say</h2>
+      <template x-for="r in [
+        { initial: 'S', name: 'Sharron G.', head: 'Who knew I had waves', text: 'After years of straightening my hair I realised it actually had a wave. Googled wave cream, came across Merwave and never looked back. Give it a go — your hair will thank you for it.' },
+        { initial: 'L', name: 'Lois King',  head: 'My hair loves Merwave', text: 'It\'s softer, lighter and my waves are bigger and less frizzy. I have a lot of very fine, flyaway hair and finally it is controllable. Would definitely recommend.' },
+        { initial: 'P', name: 'Paula Mooney', head: 'Fantastic product', text: 'Step by step, finally a way to tame the waves without looking like you were dragged through a bush backwards. Love the way the style stays when you scrunch.' }
+      ]" :key="r.name">
+        <div class="sale-review">
+          <span class="sale-review__avatar" x-text="r.initial"></span>
+          <div class="sale-review__body">
+            <span class="sale-review__stars">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </span>
+            <span class="sale-review__name" x-text="r.name"></span><span class="sale-review__verified">Verified</span>
+            <p class="sale-review__text"><span class="sale-review__head" x-text="r.head + ' — '"></span><span x-text="r.text"></span></p>
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <div class="sale-endorse">
+      <div class="sale-endorse__label">Stylist's approval</div>
+      <div class="sale-endorse__list">
+        <template x-for="s in [
+          { quote: 'Lightweight, easy to use, and delivers consistent results. I use it on my own hair, which says everything.', name: 'Emma Kenyon', handle: '@studiobarnsley' },
+          { quote: 'Merwave consistently delivers incredible results on wavy hair — the best look and finish every time, and it photographs beautifully too.', name: 'Richard James', handle: '@cyrl_cymru' },
+          { quote: 'As a curl specialist salon, it\'s refreshing to have a range designed for wavy hair, and to meet the differences between curly and wavy with such ease.', name: 'Naomi Jones', handle: '@naomijoneshairstudio' },
+          { quote: 'I didn\'t realise how many of my clients were secretly wavy until Merwave. That “oh wow, this is my hair” moment never gets old.', name: 'Rein &amp; Co', handle: '@reinandco' }
+        ]" :key="s.name">
+          <div class="sale-endorse__item">
+            <p class="sale-endorse__quote" x-text="s.quote"></p>
+            <div class="sale-endorse__name"><span x-html="s.name"></span> · <span class="sale-endorse__handle" x-text="s.handle"></span></div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <div class="sale-footer-pay">
+      <span>Visa</span><span>Mastercard</span><span>Apple Pay</span><span>Klarna</span>
+    </div>
+  </main>
+
+</div>
+
+<!-- ============================================
+     ALPINE.JS + SWIPER
+     ============================================ -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+function quiz() {
+  return {
+    step: 1,
+    totalSteps: 17,
+    answers: {
+      hairType: null,
+      concern: null,
+      symptom: null,
+      severity: null,
+      duration: null,
+      desired: [],
+      strandType: null,
+      productLoad: null,
+      tried: [],
+      wetDry: null,
+    },
+    projectedDate: '',
+    loaderPct: 0,
+    loaderPhase: 0,
+    claiming: false,
+    _loaderTimers: [],
+
+    progress() {
+      // Front-loaded curve: early screens fill faster, late screens slow down.
+      const t = Math.max(0, Math.min(1, (this.step - 1) / 16));
+      const eased = 1 - Math.pow(1 - t, 1.6);
+      return Math.round(eased * 100);
+    },
+
+    select(key, value) {
+      this.answers[key] = value;
+      this.next();
+    },
+
+    toggle(key, value) {
+      const arr = this.answers[key];
+      const i = arr.indexOf(value);
+      if (i >= 0) arr.splice(i, 1);
+      else arr.push(value);
+    },
+
+    next() {
+      if (this.step < this.totalSteps) this.step++;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      this.handleStepEnter();
+    },
+
+    back() {
+      if (this.step > 1) this.step--;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+
+    handleStepEnter() {
+      const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      this._loaderTimers.forEach((id) => clearTimeout(id) || clearInterval(id));
+      this._loaderTimers = [];
+
+      // Loader #1 — screen 10 (~3.5s, stuttered to feel computed)
+      if (this.step === 10) {
+        this.loaderPct = 0;
+        const keyframes = reduced
+          ? [{ at: 0, pct: 0 }, { at: 300, pct: 100 }]
+          : [
+              { at: 0,    pct: 0   },
+              { at: 600,  pct: 32  }, { at: 1000, pct: 32 },
+              { at: 1700, pct: 61  }, { at: 2100, pct: 61 },
+              { at: 2900, pct: 88  }, { at: 3300, pct: 88 },
+              { at: 3800, pct: 100 }
+            ];
+        const start = Date.now();
+        const id = setInterval(() => {
+          const t = Date.now() - start;
+          let pct = 0;
+          for (let i = 0; i < keyframes.length - 1; i++) {
+            const a = keyframes[i], b = keyframes[i + 1];
+            if (t >= a.at && t <= b.at) {
+              const span = b.at - a.at;
+              const localT = span > 0 ? (t - a.at) / span : 1;
+              pct = a.pct + (b.pct - a.pct) * localT;
+              break;
+            }
+          }
+          if (t > keyframes[keyframes.length - 1].at) pct = 100;
+          this.loaderPct = Math.round(pct);
+          if (pct >= 100) clearInterval(id);
+        }, 40);
+        this._loaderTimers.push(id);
+        this._loaderTimers.push(setTimeout(() => this.next(), reduced ? 500 : 4000));
+      }
+
+      // Loader #2 — screen 13 (animated checklist, ~7s)
+      if (this.step === 13) {
+        this.loaderPhase = 0;
+        const id = setInterval(() => {
+          this.loaderPhase++;
+          if (this.loaderPhase > 4) clearInterval(id);
+        }, reduced ? 80 : 1100);
+        this._loaderTimers.push(id);
+        this._loaderTimers.push(setTimeout(() => this.next(), reduced ? 500 : 7000));
+      }
+    },
+
+    init() {
+      // Projected date — PDF placeholder is ~8 weeks out. Computed dynamically; swap to a
+      // fixed [confirm] date if the client prefers.
+      const d = new Date();
+      d.setDate(d.getDate() + 56);
+      this.projectedDate = d.toLocaleDateString('en-GB', {
+        weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+      });
+    },
+
+    async checkout(btn) {
+      if (this.claiming) return;
+      if (!window.__quizCheckout) {
+        alert('Checkout is still loading. Please try again in a moment.');
+        return;
+      }
+      this.claiming = true;
+      window.__quizCheckout(btn);
+    },
+
+    showBack() {
+      // Hidden on screen 1 and the two loaders (10, 13).
+      return this.step > 1 && this.step !== 10 && this.step !== 13;
+    },
+    showContinue() {
+      return [6, 7, 11, 12, 14, 15, 16].includes(this.step);
+    },
+    canContinue() {
+      if (this.step === 6)  return this.answers.desired.length > 0;
+      if (this.step === 11) return this.answers.tried.length > 0;
+      if (this.step === 12) return !!this.answers.wetDry;
+      return true;
+    },
+    continueLabel() {
+      if (this.step === 14) return 'Show me what\'s possible';
+      if (this.step === 16) return 'See my kit';
+      return 'Continue';
+    },
+    continueAction(btn) {
+      this.next();
+    }
+  };
+}
+</script>
+
+<!-- ============================================
+     SHOPIFY STOREFRONT (cart.create → checkoutUrl)
+     ============================================
+     TODO [confirm] — fill these with the real Merwave store values before launch:
+       SHOP_DOMAIN          — e.g. merwave.myshopify.com
+       STOREFRONT_TOKEN     — Storefront API access token (Shopify Admin → Apps → Develop apps)
+       PRODUCT_HANDLE       — handle of the Wavy Hair Starter Kit
+       PREFERRED_VARIANT_GID— gid://shopify/ProductVariant/XXXXXXXXXX
+     Until filled, the checkout button shows a friendly "not available yet" alert.
+     ============================================ -->
+<script>
+(function () {
+  const SHOP_DOMAIN           = 'merwavehair.myshopify.com';
+  const STOREFRONT_TOKEN      = '54172c087cde6af188f89b4be2353c1f'; // Headless public Storefront token
+  const PRODUCT_HANDLE        = 'merwave-starter-kit';
+  const PREFERRED_VARIANT_GID = '';                            // single variant — auto-selected
+  const API_VERSION           = '2025-10';
+  const MARKET_COUNTRY        = 'GB';  // store's live £ market — see note in init()
+
+  const CONFIGURED = !/^__/.test(SHOP_DOMAIN) && !/^__/.test(STOREFRONT_TOKEN) && !/^__/.test(PRODUCT_HANDLE);
+
+  let variant = null;
+  let countryCode = MARKET_COUNTRY;
+
+  async function gql(query, variables) {
+    const res = await fetch(`https://${SHOP_DOMAIN}/api/${API_VERSION}/graphql.json`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': STOREFRONT_TOKEN },
+      body: JSON.stringify({ query, variables: variables || {} }),
+    });
+    if (!res.ok) throw new Error(`Storefront API HTTP ${res.status}`);
+    const json = await res.json();
+    if (json.errors && json.errors.length) throw new Error(json.errors[0].message);
+    return json.data;
+  }
+
+  async function fetchProduct(handle, country) {
+    const data = await gql(
+      `query P($handle: String!, $country: CountryCode!) @inContext(country: $country) {
+        productByHandle(handle: $handle) {
+          id title handle
+          images(first: 5) { nodes { url altText } }
+          variants(first: 50) { nodes {
+            id availableForSale title
+            price { amount currencyCode }
+            compareAtPrice { amount currencyCode }
+            image { url altText }
+          } }
+        }
+      }`,
+      { handle, country }
+    );
+    return data && data.productByHandle;
+  }
+
+  async function cartCreate(merchandiseId, quantity, country) {
+    const data = await gql(
+      `mutation CartCreate($lines: [CartLineInput!], $country: CountryCode!) @inContext(country: $country) {
+        cartCreate(input: { lines: $lines, buyerIdentity: { countryCode: $country } }) {
+          cart { id checkoutUrl }
+          userErrors { field message }
+        }
+      }`,
+      { lines: [{ merchandiseId, quantity }], country }
+    );
+    const payload = data.cartCreate;
+    if (payload.userErrors && payload.userErrors.length) throw new Error(payload.userErrors[0].message);
+    return payload.cart;
+  }
+
+  // Format a money amount using the variant's own currency.
+  function money(amount, currency) {
+    const n = parseFloat(amount);
+    try {
+      return new Intl.NumberFormat(undefined, {
+        style: 'currency', currency, currencyDisplay: 'narrowSymbol',
+        minimumFractionDigits: Number.isInteger(n) ? 0 : 2,
+        maximumFractionDigits: Number.isInteger(n) ? 0 : 2,
+      }).format(n);
+    } catch (_) { return `${currency} ${n}`; }
+  }
+  // Per-day price across an ~90-day supply (pence for sub-£1 GBP, else formatted).
+  function perDay(amount, currency) {
+    const d = parseFloat(amount) / 90;
+    if (currency === 'GBP' && d < 1) return `${Math.round(d * 100)}p`;
+    return money(d.toFixed(2), currency);
+  }
+
+  // Inject the real product price into screen 17 (hero + CTA + ticker).
+  function injectPrice(v) {
+    if (!v || !v.price) return;
+    const cur = v.price;
+    const curStr = money(cur.amount, cur.currencyCode);
+    document.querySelectorAll('[data-price-current]').forEach((el) => { el.textContent = curStr; });
+    const ctaEl = document.querySelector('[data-cta-price]');
+    if (ctaEl) ctaEl.textContent = `Bring my waves back — ${curStr}`;
+    const perEl = document.querySelector('[data-price-perday]');
+    if (perEl) perEl.textContent = perDay(cur.amount, cur.currencyCode);
+
+    const cmp = v.compareAtPrice;
+    const compareEl = document.querySelector('[data-price-compare]');
+    const saveEl = document.querySelector('[data-price-save]');
+    if (cmp && parseFloat(cmp.amount) > parseFloat(cur.amount)) {
+      if (compareEl) { compareEl.textContent = money(cmp.amount, cmp.currencyCode); compareEl.style.display = ''; }
+      if (saveEl) { saveEl.textContent = `Save ${money(parseFloat(cmp.amount) - parseFloat(cur.amount), cur.currencyCode)}`; saveEl.style.display = ''; }
+    } else {
+      if (compareEl) compareEl.style.display = 'none';
+      if (saveEl) saveEl.style.display = 'none';
+    }
+  }
+
+  async function init() {
+    if (!CONFIGURED) return; // creds not filled yet
+    try {
+      // UK-only funnel — pin to the GB market. Geo-detecting the buyer's country and
+      // passing e.g. UA built a cart in an unsupported market: price resolved to 0 and
+      // checkout showed the kit as SOLD OUT. GB is the store's live £ market (merwave.co.uk).
+      // To go multi-market later, restore detectCountryCode() but only for markets the
+      // store actually supports (others must fall back to GB).
+      countryCode = MARKET_COUNTRY;
+      const product = await fetchProduct(PRODUCT_HANDLE, countryCode);
+      if (!product) throw new Error('Product not found');
+      const preferred = PREFERRED_VARIANT_GID
+        ? product.variants.nodes.find(v => v.id === PREFERRED_VARIANT_GID && v.availableForSale)
+        : null;
+      variant = preferred || product.variants.nodes.find(v => v.availableForSale) || product.variants.nodes[0];
+      injectPrice(variant);
+      const img = (variant && variant.image) || (product.images && product.images.nodes && product.images.nodes[0]) || null;
+      if (img && img.url) {
+        const altText = img.altText || (variant && variant.title) || product.title;
+        document.querySelectorAll('.prelanding__media img, .sale-hero__media img').forEach((el) => {
+          el.src = img.url;
+          if (altText) el.alt = altText;
+        });
+      }
+    } catch (err) {
+      console.error('[Storefront]', err);
+    }
+  }
+  init();
+
+  window.__quizCheckout = async function (btn) {
+    if (!CONFIGURED || !variant) {
+      btn && btn.removeAttribute('aria-busy');
+      alert('Sorry, checkout isn\'t available yet. (Shopify credentials pending.)');
+      return;
+    }
+    btn.setAttribute('aria-busy', 'true');
+    try {
+      const cart = await cartCreate(variant.id, 1, countryCode);
+      window.location.href = cart.checkoutUrl;
+    } catch (err) {
+      console.error('[Checkout]', err);
+      btn.removeAttribute('aria-busy');
+      alert('Sorry, we couldn\'t start your checkout. Please try again.');
+    }
+  };
+})();
+</script>
+
+<!-- ============================================
+     IMAGE SKELETON LOADER WATCHER
+     ============================================ -->
+<script>
+(function () {
+  function markLoaded(img) { img.setAttribute('data-loaded', 'true'); }
+  function watchImage(img) {
+    if (img.hasAttribute('data-no-skeleton')) return;
+    if (img.complete && img.naturalWidth > 0) { markLoaded(img); return; }
+    img.addEventListener('load',  () => markLoaded(img), { once: true });
+    img.addEventListener('error', () => markLoaded(img), { once: true });
+  }
+  document.querySelectorAll('img').forEach(watchImage);
+  new MutationObserver((muts) => {
+    muts.forEach((m) => m.addedNodes.forEach((n) => {
+      if (n.nodeType !== 1) return;
+      if (n.tagName === 'IMG') watchImage(n);
+      else n.querySelectorAll && n.querySelectorAll('img').forEach(watchImage);
+    }));
+  }).observe(document.body, { subtree: true, childList: true });
+})();
+</script>
+
+</body>
+</html>
