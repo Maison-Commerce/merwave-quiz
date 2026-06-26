@@ -328,14 +328,13 @@ img[data-loaded="true"] { background: none !important; animation: none; }
   color: var(--color-text-primary);
   transition: border-color 0.2s var(--ease-std), background 0.2s var(--ease-std), box-shadow 0.2s var(--ease-std), transform 0.18s var(--ease-std);
 }
-.option:hover { border-color: var(--color-brand1-1200); box-shadow: var(--shadow-lg); }
+.option:hover { border-color: var(--color-brand1-1200); }
 .option:active { transform: translateY(1px); }
 .option--selected {
   border-color: transparent;
   background:
     linear-gradient(#fff, #fff) padding-box,
     var(--color-primary-gradient) border-box;
-  box-shadow: var(--shadow-lg);
 }
 .option__icon {
   flex-shrink: 0;
@@ -658,9 +657,8 @@ img[data-loaded="true"] { background: none !important; animation: none; }
   background: var(--color-white);
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-md);
-  padding: 16px;
-  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
-  box-shadow: var(--shadow-lg);
+  padding: 14px 16px;
+  display: flex; flex-direction: row; align-items: center; gap: 12px;
 }
 .prelanding__feature-icon {
   flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%;
@@ -689,8 +687,35 @@ img[data-loaded="true"] { background: none !important; animation: none; }
 /* ============================================
    SCREEN 17: SALES PAGE (the close)
    ============================================ */
-.sale-shell { max-width: 680px; margin: 0 auto; padding: 32px 24px 120px; }
-@media (max-width: 640px) { .sale-shell { padding: 24px 16px 96px; } }
+.sale-shell { max-width: 680px; margin: 0 auto; padding: 32px 24px 132px; }
+@media (max-width: 640px) { .sale-shell { padding: 24px 16px 120px; } }
+
+/* CTA directly under the hero price */
+.sale-hero__cta { margin-top: 16px; }
+@media (max-width: 640px) { .sale-hero__cta { margin-top: 14px; } }
+
+/* Sticky CTA bar — screen 17 only */
+.sale-sticky {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 60;
+  background: rgba(253, 253, 252, 0.94);
+  backdrop-filter: saturate(180%) blur(10px);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  border-top: 1px solid var(--color-border-subtle);
+  padding: 12px 24px; padding-bottom: max(12px, env(safe-area-inset-bottom));
+}
+.sale-sticky__inner {
+  width: 100%; max-width: 680px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.sale-sticky__info { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+.sale-sticky__price { font-family: var(--font-heading); font-weight: 700; font-size: 20px; color: var(--color-text-primary); }
+.sale-sticky__note { font-size: 11px; color: var(--color-text-tertiary); }
+.sale-sticky__cta { height: 48px; padding: 4px 24px; flex-shrink: 0; }
+@media (max-width: 480px) {
+  .sale-sticky { padding: 10px 16px; padding-bottom: max(10px, env(safe-area-inset-bottom)); }
+  .sale-sticky__note { display: none; }
+  .sale-sticky__cta { height: 46px; padding: 4px 18px; font-size: 15px; }
+}
 
 .sale-eyebrow {
   display: inline-block; padding: 6px 14px;
@@ -1218,7 +1243,7 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <section class="step" x-show="step === 15" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
       <div class="step__eyebrow">Your projection</div>
       <h1 class="step__title">Here's your hair once the <em>frizz becomes waves.</em></h1>
-      <p class="step__subtitle">From your very first wash, the frizz starts forming into waves instead of puffing up. Based on your answers, expect soft, defined, frizz-free waves you can air-dry — no straighteners — by <strong style="color: var(--color-text-primary);" x-text="projectedDate">Tuesday, August 4, 2026</strong>.<!-- ~8 weeks [confirm] --></p>
+      <p class="step__subtitle">From your <strong style="color: var(--color-text-primary);">very first wash</strong>, the frizz starts forming into waves instead of puffing up — soft, defined, frizz-free waves you can air-dry, with no straighteners.</p>
 
       <div class="projection-card">
         <svg class="projection-chart" viewBox="0 0 320 200" aria-hidden="true">
@@ -1240,35 +1265,28 @@ img[data-loaded="true"] { background: none !important; animation: none; }
           <path d="M 10 170 C 70 168, 95 140, 130 120 S 240 30, 310 24" fill="none" stroke="url(#chartGrad)" stroke-width="3" stroke-linecap="round"/>
           <!-- start dot: you are here -->
           <circle cx="10" cy="170" r="6" fill="#FFFFFF" stroke="#3D3D3D" stroke-width="2"/>
-          <!-- wash 1 marker -->
-          <circle cx="70" cy="168" r="5" fill="#86A6C9" stroke="#FFFFFF" stroke-width="2"/>
           <!-- end dot -->
           <circle cx="310" cy="24" r="7" fill="#12B76A" stroke="#FFFFFF" stroke-width="2.5"/>
           <circle cx="310" cy="24" r="14" fill="none" stroke="#12B76A" stroke-opacity="0.18" stroke-width="3"/>
           <g transform="translate(12, 150)">
-            <rect x="0" y="0" rx="6" ry="6" width="170" height="22" fill="#3D3D3D"/>
-            <text x="85" y="15" fill="#FFFFFF" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle">FRIZZY · STRAIGHTENING DAILY</text>
+            <rect x="0" y="0" rx="6" ry="6" width="74" height="22" fill="#3D3D3D"/>
+            <text x="37" y="15" fill="#FFFFFF" font-size="10" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.3">FRIZZY</text>
           </g>
-          <g transform="translate(46, 130)">
-            <rect x="0" y="0" rx="6" ry="6" width="168" height="20" fill="#86A6C9"/>
-            <text x="84" y="14" fill="#FFFFFF" font-size="8.5" font-weight="700" font-family="sans-serif" text-anchor="middle">WASH 1 — FRIZZ BECOMES WAVES</text>
-          </g>
-          <g transform="translate(180, 0)">
-            <rect x="0" y="0" rx="8" ry="8" width="136" height="28" fill="#12B76A"/>
-            <text x="68" y="18" fill="#FFFFFF" font-size="9.5" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.3">DEFINED WAVES · AIR-DRIED</text>
+          <g transform="translate(194, 0)">
+            <rect x="0" y="0" rx="8" ry="8" width="118" height="28" fill="#12B76A"/>
+            <text x="59" y="18" fill="#FFFFFF" font-size="10.5" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.3">DEFINED WAVES</text>
           </g>
         </svg>
         <div class="projection-axis">
           <span>Today</span>
-          <span>Wash 1</span>
-          <span x-text="projectedDate">~8 weeks</span>
+          <span>After your first wash</span>
         </div>
-        <span class="projection-pill">Air-dried, frizz-free waves by <strong x-text="projectedDate">~8 weeks</strong></span>
+        <span class="projection-pill">Defined, air-dried waves from your <strong>very first wash</strong></span>
       </div>
 
       <div class="diagnosis-copy" style="margin-top: 24px;">
         <p>The wave is already there. From your very first wash, <strong>the frizz starts forming into waves</strong> instead of puffing up — and you can air-dry it, no straighteners.</p>
-        <p>Most women see a difference from the very first wash. The full transformation builds over the weeks that follow.</p>
+        <p>You'll see the change from the very first wash, and it only gets better the more you use it.</p>
       </div>
       <!-- [Flag for compliance review.] -->
     </section>
@@ -1327,7 +1345,7 @@ img[data-loaded="true"] { background: none !important; animation: none; }
   </main>
 
   <!-- ===== STICKY STEP NAV (screens 6,7,11,12,14,15,16) ===== -->
-  <nav class="step-nav" x-show="step <= 16 && (showBack() || showContinue())" x-transition.opacity>
+  <nav class="step-nav" x-show="step <= 16 && (showBack() || showContinue())">
     <div class="step-nav__inner">
       <button class="btn-back" @click="back()" x-show="showBack()" :style="showBack() ? '' : 'visibility: hidden'">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
@@ -1349,7 +1367,10 @@ img[data-loaded="true"] { background: none !important; animation: none; }
   <!-- ============================================
        SCREEN 17: SALES PAGE (the close)
        ============================================ -->
-  <main class="sale-shell" x-show="step === 17" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end">
+  <!-- NB: no x-transition here on purpose. A cross-<main> enter transition on this
+       element left it stuck (display:none + enter-start) AND blocked the sibling
+       quiz-shell from hiding on the 16->17 step, so screen 17 never appeared. -->
+  <main class="sale-shell" x-show="step === 17">
     <span class="sale-eyebrow">£20 off today</span>
     <h1 class="sale-headline">Your Wavy Hair Starter Kit — <em>£20 off today</em></h1>
     <p class="sale-subhead">Everything your waves have been missing, in one 5-step system.</p>
@@ -1366,6 +1387,16 @@ img[data-loaded="true"] { background: none !important; animation: none; }
           <span class="sale-hero__price-save" data-price-save>Save £20</span>
         </div>
         <p class="sale-hero__ticker">Around a 90-day supply — roughly <span data-price-perday>72p</span> a day for waves that finally hold.</p>
+        <button class="btn-cta btn-cta--full sale-hero__cta" @click="checkout($el)">
+          <span class="btn-cta__content">
+            <span>Turn my frizz into waves</span>
+            <span class="btn-cta__arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </span>
+          <span class="btn-cta__loading" aria-hidden="true">
+            <span class="btn-cta__spinner"></span>
+            <span>Taking you to your kit…</span>
+          </span>
+        </button>
       </div>
     </div>
 
@@ -1481,6 +1512,26 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     </div>
   </main>
 
+  <!-- ===== STICKY CTA BAR (screen 17 only) ===== -->
+  <nav class="sale-sticky" x-show="step === 17">
+    <div class="sale-sticky__inner">
+      <div class="sale-sticky__info">
+        <span class="sale-sticky__price"><span data-price-current>£65</span></span>
+        <span class="sale-sticky__note">Free UK delivery · 90-day guarantee</span>
+      </div>
+      <button class="btn-cta sale-sticky__cta" @click="checkout($el)">
+        <span class="btn-cta__content">
+          <span>Get my kit</span>
+          <span class="btn-cta__arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </span>
+        <span class="btn-cta__loading" aria-hidden="true">
+          <span class="btn-cta__spinner"></span>
+          <span>One sec…</span>
+        </span>
+      </button>
+    </div>
+  </nav>
+
 </div>
 
 <!-- ============================================
@@ -1506,7 +1557,6 @@ function quiz() {
       curlyProducts: null,
       dries: null,
     },
-    projectedDate: '',
     loaderPct: 0,
     loaderPhase: 0,
     claiming: false,
@@ -1593,13 +1643,7 @@ function quiz() {
     },
 
     init() {
-      // Projected date — PDF placeholder is ~8 weeks out. Computed dynamically; swap to a
-      // fixed [confirm] date if the client prefers.
-      const d = new Date();
-      d.setDate(d.getDate() + 56);
-      this.projectedDate = d.toLocaleDateString('en-GB', {
-        weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
-      });
+      // Projection screen is framed around the first wash, so no date is computed here.
     },
 
     async checkout(btn) {
