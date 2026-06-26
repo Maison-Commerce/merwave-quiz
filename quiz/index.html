@@ -8,8 +8,8 @@
 <meta name="ClaudeBot" content="noindex, nofollow">
 <meta name="CCBot" content="noindex, nofollow">
 <meta name="Google-Extended" content="noindex, nofollow">
-<title>Merwave Hair Analysis — is your hair actually curly?</title>
-<meta name="description" content="Answer a few questions about how your hair really behaves, and we'll tell you what type your hair actually is — and the routine built for it.">
+<title>Merwave Hair Analysis — is your hair actually wavy?</title>
+<meta name="description" content="A 2-minute analysis to find your real hair type — and the routine built for it. Most women who think their hair is straight and frizzy are actually wavy.">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <style>
 /* ============================================
@@ -843,21 +843,21 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <!-- ===== SCREEN 1: HAIR TYPE SELF-ID ===== -->
     <section class="step" x-show="step === 1" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
       <div class="step__eyebrow">A 2-minute hair analysis</div>
-      <h1 class="step__title">Is your hair actually curly? Take the 2-minute hair analysis.</h1>
+      <h1 class="step__title">Is your hair actually <em>wavy?</em></h1>
       <p class="step__subtitle step__subtitle--inline-icon">
         <span class="step__subtitle-icon" aria-hidden="true">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </span>
-        <span>Answer a few questions about how your hair really behaves, and we'll tell you what type your hair actually is — and the routine built for it.</span>
+        <span>A 2-minute analysis to find your real hair type — and the routine built for it.</span>
       </p>
 
       <h2 class="step__question">Which of these sounds most like your hair?</h2>
       <div class="options">
         <template x-for="opt in [
-          'Curly — but it never behaves the way curly hair is supposed to',
-          'Curly one day, flat the next',
-          'Frizzy and puffy more than anything',
-          'I\'ve given up trying to label it'
+          'Straight, but frizzy and hard to manage',
+          'Smooth-ish on top, but it puffs and kinks underneath',
+          'I straighten it most days just to keep it under control',
+          'Frizzy and fluffy, never properly smooth'
         ]" :key="opt">
           <button class="option" :class="{ 'option--selected': answers.hairType === opt }" @click="select('hairType', opt)">
             <span class="option__label" x-text="opt"></span>
@@ -871,8 +871,8 @@ img[data-loaded="true"] { background: none !important; animation: none; }
       <div class="proof-quote">
         <div class="proof-quote__avatar proof-quote__avatar--initial" aria-hidden="true">D</div>
         <p class="proof-quote__text">
-          "I knew I had wavy/curly hair but fought against it for years, constantly straightening it. My waves never stayed all day — my hair became a mess by lunchtime. Merwave changed that."
-          <span class="proof-quote__name">Dawn H. · Verified customer</span>
+          "I straightened my hair every day for years — I thought it was just frizzy. Turns out it's wavy, and my straighteners haven't come out since."
+          <span class="proof-quote__name">Dawn H. · Verified customer<!-- [confirm — swap for a real review] --></span>
         </p>
       </div>
     </section>
@@ -880,14 +880,14 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <!-- ===== SCREEN 2: PRIMARY CONCERN ===== -->
     <section class="step" x-show="step === 2" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
       <div class="step__eyebrow">Screen 2 of 17</div>
-      <h2 class="step__question">What's the single most frustrating thing about your hair right now?</h2>
+      <h2 class="step__question">What's the most frustrating thing about your hair right now?</h2>
       <div class="options">
         <template x-for="opt in [
-          { value: 'flat-lunch',  label: 'My curls fall flat by lunchtime', emoji: '🕛' },
-          { value: 'greasy',      label: 'It goes greasy and stringy a day after washing', emoji: '💧' },
-          { value: 'wont-hold',   label: 'I pile on product and it still won\'t hold', emoji: '🧴' },
-          { value: 'drops-dry',   label: 'It looks amazing wet, then drops the second it dries', emoji: '🌊' },
-          { value: 'lifeless',    label: 'It\'s just flat and lifeless, whatever I do', emoji: '😔' }
+          { value: 'dries-frizzy',  label: 'It dries frizzy, fluffy and puffy', emoji: '🌫️' },
+          { value: 'never-smooth',  label: 'It never looks smooth unless I straighten it', emoji: '✨' },
+          { value: 'dependent',     label: 'I\'m completely dependent on my straighteners', emoji: '🔥' },
+          { value: 'curly-nothing', label: 'I tried curly-hair products and they did nothing', emoji: '🧴' },
+          { value: 'frizz-midday',  label: 'It looks fine leaving the house, then frizzes up by midday', emoji: '🕛' }
         ]" :key="opt.value">
           <button class="option" :class="{ 'option--selected': answers.concern === opt.value }" @click="select('concern', opt.value)">
             <span class="option__icon"><span class="option__icon-emoji" x-text="opt.emoji"></span></span>
@@ -903,9 +903,9 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <!-- ===== SCREEN 3: SYMPTOM RECOGNITION ===== -->
     <section class="step" x-show="step === 3" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
       <div class="step__eyebrow">Screen 3 of 17</div>
-      <h2 class="step__question">When your hair dries, do the curls or waves go limp and lose their shape?</h2>
+      <h2 class="step__question">When you let your hair dry on its own, does it turn frizzy and puffy instead of smooth?</h2>
       <div class="options">
-        <template x-for="opt in ['Yes — every single time', 'Sometimes, depends on the day', 'No, they hold fine']" :key="opt">
+        <template x-for="opt in ['Yes — every time, that\'s exactly why I straighten it', 'Sometimes — it depends on the weather', 'No, it dries smooth']" :key="opt">
           <button class="option" :class="{ 'option--selected': answers.symptom === opt }" @click="select('symptom', opt)">
             <span class="option__label" x-text="opt"></span>
             <span class="option__check" aria-hidden="true">
@@ -919,13 +919,13 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <!-- ===== SCREEN 4: SEVERITY (visual scale) ===== -->
     <section class="step" x-show="step === 4" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
       <div class="step__eyebrow">Screen 4 of 17</div>
-      <h2 class="step__question">By the end of the day, how much of your hair's shape is left?</h2>
+      <h2 class="step__question">How often do you reach for your straighteners?</h2>
       <div class="options">
         <template x-for="opt in [
-          { value: 'none',    label: 'Basically none — flat and stuck to my head', amp: 1 },
-          { value: 'quarter', label: 'About a quarter — the rest has dropped',     amp: 3 },
-          { value: 'half',    label: 'Around half holds',                          amp: 6 },
-          { value: 'most',    label: 'Most of it stays put',                       amp: 9 }
+          { value: 'daily',   label: 'Every day — I can\'t leave the house without them', amp: 1 },
+          { value: 'weekly',  label: 'A few times a week',                                amp: 3 },
+          { value: 'events',  label: 'Only for events or special occasions',             amp: 6 },
+          { value: 'rarely',  label: 'Rarely',                                           amp: 9 }
         ]" :key="opt.value">
           <button class="option" :class="{ 'option--selected': answers.severity === opt.value }" @click="select('severity', opt.value)">
             <span class="option__icon" style="background:transparent; width:44px;">
@@ -947,7 +947,7 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <!-- ===== SCREEN 5: DURATION ===== -->
     <section class="step" x-show="step === 5" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
       <div class="step__eyebrow">Screen 5 of 17</div>
-      <h2 class="step__question">How long have you been calling your hair "curly" and fighting to make it behave?</h2>
+      <h2 class="step__question">How long have you thought of your hair as just "frizzy" or "hard to manage"?</h2>
       <div class="options">
         <template x-for="opt in ['Less than a year', '1–3 years', '3–5 years', 'As long as I can remember']" :key="opt">
           <button class="option" :class="{ 'option--selected': answers.duration === opt }" @click="select('duration', opt)">
@@ -963,15 +963,15 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <!-- ===== SCREEN 6: DESIRED OUTCOME (multi) ===== -->
     <section class="step" x-show="step === 6" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
       <div class="step__eyebrow">Screen 6 of 17</div>
-      <h1 class="step__title">If your hair finally cooperated, what would you want <em>from it?</em></h1>
+      <h1 class="step__title">If your hair finally behaved, what would you want <em>from it?</em></h1>
       <p class="step__question-helper" style="margin-top: -4px; margin-bottom: 18px;">Pick everything that applies.</p>
       <div class="options">
         <template x-for="opt in [
-          { value: 'defined-lasts', label: 'Soft, defined waves that actually last the day', emoji: '🌊' },
-          { value: 'no-grease',     label: 'No more grease or weighed-down, stringy roots', emoji: '✨' },
-          { value: 'quick',         label: 'A routine that takes minutes, not a whole evening', emoji: '⏱️' },
-          { value: 'effortless',    label: 'Hair that looks effortless, like I just woke up like this', emoji: '😌' },
-          { value: 'stop-buying',   label: 'To stop buying product after product that never works', emoji: '🛑' }
+          { value: 'defined-waves', label: 'Soft, defined waves instead of frizz', emoji: '🌊' },
+          { value: 'air-dry',       label: 'Hair I can leave to air-dry and actually like', emoji: '😌' },
+          { value: 'no-heat',       label: 'A break from heat damage and daily straightening', emoji: '🔥' },
+          { value: 'manageable',    label: 'Smooth, manageable hair without the daily fight', emoji: '✨' },
+          { value: 'understand',    label: 'To finally understand what my hair actually needs', emoji: '💡' }
         ]" :key="opt.value">
           <button class="option option--multi" :class="{ 'option--selected': answers.desired.includes(opt.value) }" @click="toggle('desired', opt.value)">
             <span class="option__icon"><span class="option__icon-emoji" x-text="opt.emoji"></span></span>
@@ -987,18 +987,18 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <!-- ===== SCREEN 7: VALIDATION INTERSTITIAL ===== -->
     <section class="step" x-show="step === 7" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
       <div class="step__eyebrow">A quick pause</div>
-      <h1 class="step__title">You're not bad at <em>curly hair.</em></h1>
+      <h1 class="step__title">You're not bad at <em>managing your hair.</em></h1>
       <div class="step__subtitle step__subtitle--stacked">
-        <p>Most women fighting "difficult curls" don't have curly hair at all — they're wavy, and wavy hair behaves nothing like curly hair. 47% never find out.<!-- [confirm stat — Merwave's own figure] --></p>
-        <p><strong style="color: var(--color-text-primary);">Your results will show which one you are.</strong></p>
+        <p>47% of women find out their "straight" hair was wavy all along. Frizz is just what waves do without the right care.</p>
+        <p><strong style="color: var(--color-text-primary);">Your results are almost ready.</strong></p>
       </div>
 
       <figure class="beforeafter beforeafter--single">
-        <img src="assets/before-after.webp" alt="Before and after — flat, weighed-down hair becomes soft defined waves">
+        <img src="assets/before-after.webp" alt="Before and after — frizzy, straightened-flat hair becomes soft defined waves">
       </figure>
 
       <p class="step__subtitle" style="margin-top: 18px; margin-bottom: 0; font-size: 14px; color: var(--color-text-tertiary);">
-        <strong style="color: var(--color-text-secondary);">5,409</strong> reviews · ★4.5<!-- [confirm — pulled from Merwave's live review widget] -->
+        <strong style="color: var(--color-text-secondary);">5,376</strong> women have already taken this analysis · ★4.8<!-- [confirm current count + rating] -->
       </p>
     </section>
 
@@ -1027,15 +1027,16 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <!-- ===== SCREEN 9: PRODUCT LOAD ===== -->
     <section class="step" x-show="step === 9" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
       <div class="step__eyebrow">Screen 9 of 17</div>
-      <h2 class="step__question">On a wash day, how many products go into your hair?</h2>
+      <h2 class="step__question">On a normal day, what do you do to keep the frizz under control?</h2>
       <div class="options">
         <template x-for="opt in [
-          { value: '1-2',   label: '1–2', emoji: '🧴' },
-          { value: '3-4',   label: '3–4', emoji: '🧴' },
-          { value: '5plus', label: '5 or more', emoji: '🧴' },
-          { value: 'lost',  label: 'I\'ve genuinely lost count', emoji: '🤯' }
+          { value: 'straighten', label: 'Straighten it', emoji: '🔥' },
+          { value: 'serum',      label: 'Serum or oil, then hope for the best', emoji: '🫗' },
+          { value: 'tie-up',     label: 'Tie it up and hide it', emoji: '🎀' },
+          { value: 'regret',     label: 'Wash it, leave it, and regret it later', emoji: '😔' },
+          { value: 'bit-of-all', label: 'A bit of everything, depending on the day', emoji: '🔄' }
         ]" :key="opt.value">
-          <button class="option" :class="{ 'option--selected': answers.productLoad === opt.value }" @click="select('productLoad', opt.value)">
+          <button class="option" :class="{ 'option--selected': answers.coping === opt.value }" @click="select('coping', opt.value)">
             <span class="option__icon"><span class="option__icon-emoji" x-text="opt.emoji"></span></span>
             <span class="option__label" x-text="opt.label"></span>
             <span class="option__check" aria-hidden="true">
@@ -1050,7 +1051,7 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <section class="step" x-show="step === 10" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
       <div class="loader">
         <h2 class="loader__title">Analysing how your hair behaves…</h2>
-        <p class="loader__subtitle">Matching your answers against thousands of wavy and curly hair profiles to find your real hair type.</p>
+        <p class="loader__subtitle">Matching your answers against thousands of straight and wavy hair profiles to find your real hair type.</p>
         <div class="loader__bar"><div class="loader__bar-fill" :style="`width: ${loaderPct}%`"></div></div>
         <div class="loader__pct"><span x-text="loaderPct"></span>%</div>
       </div>
@@ -1059,17 +1060,15 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <!-- ===== SCREEN 11: WHAT SHE'S TRIED (multi + why-box) ===== -->
     <section class="step" x-show="step === 11" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
       <div class="step__eyebrow">Screen 11 of 17</div>
-      <h2 class="step__question">Which of these have you tried to fix your hair?</h2>
-      <p class="step__question-helper">Choose everything that applies.</p>
+      <h2 class="step__question">Have you ever tried curly-hair products?</h2>
       <div class="options">
         <template x-for="opt in [
-          { value: 'cgm',     label: 'The Curly Girl Method', emoji: '📋' },
-          { value: 'creams',  label: 'Heavy curl creams and butters', emoji: '🧈' },
-          { value: 'oils',    label: 'Oils and leave-in masks', emoji: '🫗' },
-          { value: 'gels',    label: 'Strong-hold gels and mousses', emoji: '🌫️' },
-          { value: 'all',     label: 'All of the above, if I\'m honest', emoji: '🙈' }
+          { value: 'did-nothing',  label: 'Yes — they did nothing for me', emoji: '🤷' },
+          { value: 'greasy-flat',  label: 'Yes — they left it greasy and flat', emoji: '💧' },
+          { value: 'not-curly',    label: 'No, my hair isn\'t curly', emoji: '🚫' },
+          { value: 'never',        label: 'No, it never occurred to me', emoji: '🤔' }
         ]" :key="opt.value">
-          <button class="option option--multi" :class="{ 'option--selected': answers.tried.includes(opt.value) }" @click="toggle('tried', opt.value)">
+          <button class="option" :class="{ 'option--selected': answers.curlyProducts === opt.value }" @click="answers.curlyProducts = opt.value">
             <span class="option__icon"><span class="option__icon-emoji" x-text="opt.emoji"></span></span>
             <span class="option__label" x-text="opt.label"></span>
             <span class="option__check" aria-hidden="true">
@@ -1083,7 +1082,7 @@ img[data-loaded="true"] { background: none !important; animation: none; }
         <span class="why-box__icon">i</span>
         <div>
           <div class="why-box__title">Why we ask</div>
-          <p class="why-box__text">Almost every "curly" product is built for thick, coily hair that drinks up heavy butters and oils. On finer wavy strands, that same weight does the opposite — it drags the wave down until it falls flat and turns greasy. Knowing what you've used tells us exactly what's been weighing you down.</p>
+          <p class="why-box__text">Curly-hair products are built for thick, coily hair that soaks up heavy butters and oils. On finer wavy strands they sit there and do nothing, or weigh the hair down — so it stays flat and frizzy, and you go straight back to the straighteners. That failure is one of the clearest signs your hair is wavy, not curly or straight.</p>
         </div>
       </div>
     </section>
@@ -1091,14 +1090,15 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <!-- ===== SCREEN 12: WET VS DRY (single + why-box) ===== -->
     <section class="step" x-show="step === 12" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
       <div class="step__eyebrow">Screen 12 of 17</div>
-      <h2 class="step__question">Straight out of the shower, how does your hair look while it's still wet?</h2>
+      <h2 class="step__question">When your hair dries without heat, what does it actually do?</h2>
       <div class="options">
         <template x-for="opt in [
-          'Gorgeous — defined and exactly what I want',
-          'Good, but it changes as it dries',
-          'Already a bit flat, even wet'
+          'Puffs up and frizzes',
+          'Goes flat and a bit stringy',
+          'Kinks and bends in random places',
+          'Dries straight-ish but rough and dull'
         ]" :key="opt">
-          <button class="option" :class="{ 'option--selected': answers.wetDry === opt }" @click="answers.wetDry = opt">
+          <button class="option" :class="{ 'option--selected': answers.dries === opt }" @click="answers.dries = opt">
             <span class="option__label" x-text="opt"></span>
             <span class="option__check" aria-hidden="true">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1111,7 +1111,7 @@ img[data-loaded="true"] { background: none !important; animation: none; }
         <span class="why-box__icon">i</span>
         <div>
           <div class="why-box__title">Why we ask</div>
-          <p class="why-box__text">Defined when wet, then flat and stringy as it dries is the signature of wavy hair carrying too much product weight. The shape is already there — it's being pulled flat by formulas your strands were never built to hold.</p>
+          <p class="why-box__text">As wavy hair dries, the strands need to clump together to form the wave. Without lightweight products made for that, they dry apart instead — and you get frizz and puff where the wave should be. Straightening flattens it for a day, but the heat damages the strand and the frizz comes back. The wave is there. It's just never been given what it needs to form.</p>
         </div>
       </div>
     </section>
@@ -1123,8 +1123,8 @@ img[data-loaded="true"] { background: none !important; animation: none; }
         <ul class="checklist">
           <template x-for="(row, idx) in [
             { label: 'Mapping your wave pattern' },
-            { label: 'Comparing curly vs wavy markers' },
-            { label: 'Pinpointing what\'s weighing your hair down' },
+            { label: 'Checking straight vs wavy markers' },
+            { label: 'Measuring how much heat and frizz are hiding your waves' },
             { label: 'Almost there…' }
           ]" :key="row.label">
             <li class="checklist__row"
@@ -1148,8 +1148,8 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <!-- ===== SCREEN 14: DIAGNOSIS (the aha) ===== -->
     <section class="step" x-show="step === 14" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
       <div class="step__eyebrow">Your result</div>
-      <h1 class="step__title">You're not curly. <em>You're wavy.</em></h1>
-      <p class="step__subtitle" style="margin-bottom: 24px;">Wave expression — currently suppressed</p>
+      <h1 class="step__title">Your hair isn't straight. <em>It's wavy.</em></h1>
+      <p class="step__subtitle" style="margin-bottom: 24px;">Wave expression — currently hidden by frizz</p>
 
       <div class="diagnosis-meter">
         <template x-if="step === 14">
@@ -1184,7 +1184,7 @@ img[data-loaded="true"] { background: none !important; animation: none; }
           </div>
           <div>
             <div class="diagnosis-card__title">Your hair profile</div>
-            <div class="diagnosis-card__diagnosis">Your hair isn't curly. It's <em>wavy, Type 2</em> — and it's been weighed down this whole time.</div>
+            <div class="diagnosis-card__diagnosis">Your hair isn't straight, and it isn't simply frizzy. It's <em>wavy, Type 2</em> — and the frizz is your wave trying to form.</div>
           </div>
         </div>
         <div class="diagnosis-card__rows">
@@ -1193,12 +1193,12 @@ img[data-loaded="true"] { background: none !important; animation: none; }
             <span class="diagnosis-card__row-val">Wavy (Type 2)</span>
           </div>
           <div class="diagnosis-card__row">
-            <span class="diagnosis-card__row-key">What went wrong</span>
-            <span class="diagnosis-card__row-val">Curl-weight products<small>on fine wavy strands</small></span>
+            <span class="diagnosis-card__row-key">What's been happening</span>
+            <span class="diagnosis-card__row-val">Wave suppressed by heat<small>and frizz-fighting, not wave-forming, care</small></span>
           </div>
           <div class="diagnosis-card__row">
             <span class="diagnosis-card__row-key">Wave potential</span>
-            <span class="diagnosis-card__row-val diagnosis-card__row-val--good">HIGH<small>currently suppressed</small></span>
+            <span class="diagnosis-card__row-val diagnosis-card__row-val--good">HIGH<small>hidden under frizz</small></span>
           </div>
           <div class="diagnosis-card__row">
             <span class="diagnosis-card__row-key">Room for improvement</span>
@@ -1208,8 +1208,8 @@ img[data-loaded="true"] { background: none !important; animation: none; }
       </div>
 
       <div class="diagnosis-copy">
-        <p>Fine strands, shape that looks great wet then drops flat and greasy as it dries, and years of heavy curly products that never held — <strong>your hair isn't curly. It's wavy, Type 2,</strong> and it's been weighed down this whole time.</p>
-        <p>Here's the part no one told you: <strong>your wave pattern is still there. It's just being suppressed</strong> by formulas your strands were never built to carry.</p>
+        <p>Fine strands, frizz and puff every time it air-dries, years of straightening to keep it manageable, and curly products that did nothing — <strong>your hair isn't straight, and it isn't simply frizzy. It's wavy, Type 2.</strong></p>
+        <p>The frizz you've been fighting is your wave trying to form without the right support. <strong>Heat and the wrong products have kept it hidden.</strong> The wave has been there the whole time.</p>
       </div>
       <!-- [Flag for compliance review — wellness positioning, not a medical claim.] -->
     </section>
@@ -1217,8 +1217,8 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <!-- ===== SCREEN 15: PROJECTION ===== -->
     <section class="step" x-show="step === 15" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
       <div class="step__eyebrow">Your projection</div>
-      <h1 class="step__title">Here's what your hair does once the <em>weight comes off.</em></h1>
-      <p class="step__subtitle">From your very first wash, your waves start coming back. Based on your answers, expect soft, defined, frizz-free waves that hold all day by <strong style="color: var(--color-text-primary);" x-text="projectedDate">Tuesday, August 4, 2026</strong>.<!-- ~8 weeks [confirm] --></p>
+      <h1 class="step__title">Here's your hair once the <em>frizz becomes waves.</em></h1>
+      <p class="step__subtitle">From your very first wash, the frizz starts forming into waves instead of puffing up. Based on your answers, expect soft, defined, frizz-free waves you can air-dry — no straighteners — by <strong style="color: var(--color-text-primary);" x-text="projectedDate">Tuesday, August 4, 2026</strong>.<!-- ~8 weeks [confirm] --></p>
 
       <div class="projection-card">
         <svg class="projection-chart" viewBox="0 0 320 200" aria-hidden="true">
@@ -1245,17 +1245,17 @@ img[data-loaded="true"] { background: none !important; animation: none; }
           <!-- end dot -->
           <circle cx="310" cy="24" r="7" fill="#12B76A" stroke="#FFFFFF" stroke-width="2.5"/>
           <circle cx="310" cy="24" r="14" fill="none" stroke="#12B76A" stroke-opacity="0.18" stroke-width="3"/>
-          <g transform="translate(16, 150)">
-            <rect x="0" y="0" rx="6" ry="6" width="110" height="22" fill="#3D3D3D"/>
-            <text x="55" y="15" fill="#FFFFFF" font-size="9.5" font-weight="700" font-family="sans-serif" text-anchor="middle">YOU ARE HERE</text>
+          <g transform="translate(12, 150)">
+            <rect x="0" y="0" rx="6" ry="6" width="170" height="22" fill="#3D3D3D"/>
+            <text x="85" y="15" fill="#FFFFFF" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle">FRIZZY · STRAIGHTENING DAILY</text>
           </g>
-          <g transform="translate(60, 130)">
-            <rect x="0" y="0" rx="6" ry="6" width="140" height="20" fill="#86A6C9"/>
-            <text x="70" y="14" fill="#FFFFFF" font-size="9" font-weight="700" font-family="sans-serif" text-anchor="middle">WASH 1 — WAVES RETURN</text>
+          <g transform="translate(46, 130)">
+            <rect x="0" y="0" rx="6" ry="6" width="168" height="20" fill="#86A6C9"/>
+            <text x="84" y="14" fill="#FFFFFF" font-size="8.5" font-weight="700" font-family="sans-serif" text-anchor="middle">WASH 1 — FRIZZ BECOMES WAVES</text>
           </g>
-          <g transform="translate(196, 0)">
-            <rect x="0" y="0" rx="8" ry="8" width="120" height="28" fill="#12B76A"/>
-            <text x="60" y="18" fill="#FFFFFF" font-size="10.5" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.5">WAVES THAT LAST</text>
+          <g transform="translate(180, 0)">
+            <rect x="0" y="0" rx="8" ry="8" width="136" height="28" fill="#12B76A"/>
+            <text x="68" y="18" fill="#FFFFFF" font-size="9.5" font-weight="700" font-family="sans-serif" text-anchor="middle" letter-spacing="0.3">DEFINED WAVES · AIR-DRIED</text>
           </g>
         </svg>
         <div class="projection-axis">
@@ -1263,11 +1263,11 @@ img[data-loaded="true"] { background: none !important; animation: none; }
           <span>Wash 1</span>
           <span x-text="projectedDate">~8 weeks</span>
         </div>
-        <span class="projection-pill">Defined waves that hold all day by <strong x-text="projectedDate">~8 weeks</strong></span>
+        <span class="projection-pill">Air-dried, frizz-free waves by <strong x-text="projectedDate">~8 weeks</strong></span>
       </div>
 
       <div class="diagnosis-copy" style="margin-top: 24px;">
-        <p>The shape is already there. Once the weight comes off, <strong>your waves stop being dragged flat</strong> and start holding the way they were always meant to.</p>
+        <p>The wave is already there. From your very first wash, <strong>the frizz starts forming into waves</strong> instead of puffing up — and you can air-dry it, no straighteners.</p>
         <p>Most women see a difference from the very first wash. The full transformation builds over the weeks that follow.</p>
       </div>
       <!-- [Flag for compliance review.] -->
@@ -1277,7 +1277,7 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <section class="step" x-show="step === 16" x-transition:enter="step-trans-enter" x-transition:enter-start="step-trans-enter-start" x-transition:enter-end="step-trans-enter-end" x-transition:leave="step-trans-leave" x-transition:leave-start="step-trans-leave-start" x-transition:leave-end="step-trans-leave-end">
       <div class="step__eyebrow">Recommended for your profile</div>
       <h1 class="step__title">Because your hair is wavy, there's exactly <em>one routine</em> built for it.</h1>
-      <p class="step__subtitle">The Merwave Wavy Hair Starter Kit is made for fine, wavy (Type 2) hair — lightweight formulas that define your waves without the weight that's been flattening them. Because you qualify, it's covered by our 90-day money-back guarantee<!-- [confirm terms] -->: defined waves, or your money back.</p>
+      <p class="step__subtitle">The Merwave Wavy Hair Starter Kit is made for fine, wavy (Type 2) hair — lightweight formulas that turn frizz into defined waves, so you can finally put the straighteners down. Because you qualify, it's covered by our 90-day money-back guarantee<!-- [confirm terms] -->: defined waves, or your money back.</p>
 
       <div class="prelanding">
         <div class="prelanding__media"><img src="product-kit.png" alt="Merwave Wavy Hair Starter Kit"></div>
@@ -1286,7 +1286,7 @@ img[data-loaded="true"] { background: none !important; animation: none; }
             <div class="prelanding__feature-icon">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2-4 5-4 7 0s5 4 7 0 5-4 6 0"/></svg>
             </div>
-            <div class="prelanding__feature-title">Defines waves in one wash</div>
+            <div class="prelanding__feature-title">Turns frizz into waves</div>
           </div>
           <div class="prelanding__feature">
             <div class="prelanding__feature-icon">
@@ -1296,9 +1296,9 @@ img[data-loaded="true"] { background: none !important; animation: none; }
           </div>
           <div class="prelanding__feature">
             <div class="prelanding__feature-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </div>
-            <div class="prelanding__feature-title">15-minute routine</div>
+            <div class="prelanding__feature-title">No straighteners needed</div>
           </div>
           <div class="prelanding__feature">
             <div class="prelanding__feature-icon">
@@ -1313,7 +1313,7 @@ img[data-loaded="true"] { background: none !important; animation: none; }
         <span class="prelanding-guarantee__icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </span>
-        <p class="prelanding-guarantee__text"><strong>47% of women never realise their hair is wavy.</strong><!-- [confirm stat] --> You just did — and that's exactly why this kit is built for you.</p>
+        <p class="prelanding-guarantee__text"><strong>47% of women never realise their hair is wavy.</strong> You just did — and that's exactly why this kit is built for you.</p>
       </div>
     </section>
 
@@ -1354,7 +1354,7 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <h1 class="sale-headline">Your Wavy Hair Starter Kit — <em>£20 off today</em></h1>
     <p class="sale-subhead">Everything your waves have been missing, in one 5-step system.</p>
     <p class="sale-trust">
-      ★4.5 from 5,409 reviews<!-- [confirm — from Merwave's live review widget] -->
+      ★4.8 from 5,376 reviews<!-- [confirm — from Merwave's live review widget] -->
     </p>
 
     <div class="sale-hero">
@@ -1372,11 +1372,11 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <h2 class="sale-section-title">Why this kit, when nothing else worked</h2>
     <ul class="sale-bullets">
       <template x-for="b in [
-        'Five lightweight products made for wavy hair, not curly — so nothing drags your waves flat',
+        'Five lightweight products made for wavy hair, so frizz forms into waves instead of puffing up',
         'Defines your natural waves from the very first wash',
-        'Leaves roots clean and light instead of greasy and weighed down',
-        'A 15-minute routine that replaces the 5-product evening you\'ve been doing',
-        'Cruelty-free and colour-safe'
+        'Lets you air-dry and step away from daily straightening',
+        'Calms frizz and puff for days, even in humidity',
+        'A 15-minute routine, cruelty-free and colour-safe'
       ]" :key="b">
         <li class="sale-bullet">
           <span class="sale-bullet__icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
@@ -1390,7 +1390,7 @@ img[data-loaded="true"] { background: none !important; animation: none; }
       <template x-for="(s, i) in [
         { name: 'Cleanse Shampoo', desc: 'Washes without stripping' },
         { name: 'Repair Conditioner', desc: 'Hydrates and detangles' },
-        { name: 'Wave Cream', desc: 'Defines the wave and cuts frizz' },
+        { name: 'Wave Cream', desc: 'Forms the wave and tames frizz' },
         { name: 'Cast Foam', desc: 'Builds shape and hold' },
         { name: 'Protect Gel', desc: 'Locks the waves in as they dry' }
       ]" :key="s.name">
@@ -1417,12 +1417,12 @@ img[data-loaded="true"] { background: none !important; animation: none; }
     <div class="sale-cta-card">
       <button class="btn-cta btn-cta--full btn-cta--xl" id="quizCheckoutBtn" @click="checkout($el)">
         <span class="btn-cta__content">
-          <span data-cta-price>Bring my waves back — £65</span>
+          <span data-cta-price>Turn my frizz into waves</span>
           <span class="btn-cta__arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </span>
         <span class="btn-cta__loading" aria-hidden="true">
           <span class="btn-cta__spinner"></span>
-          <span>Securing your kit…</span>
+          <span>Taking you to your kit…</span>
         </span>
       </button>
       <p class="sale-scarcity">Free UK delivery · Secure checkout<!-- [confirm real scarcity mechanism before launch — avoid fake countdown] --></p>
@@ -1432,7 +1432,7 @@ img[data-loaded="true"] { background: none !important; animation: none; }
       <span class="sale-guarantee__icon">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       </span>
-      <p class="sale-guarantee__text"><strong>90-day money-back guarantee.</strong><!-- [confirm] --> If your waves don't come back, you don't pay.</p>
+      <p class="sale-guarantee__text"><strong>90-day money-back guarantee.</strong><!-- [confirm] --> If your frizz doesn't turn into waves, you don't pay.</p>
     </div>
 
     <div class="sale-reviews">
@@ -1502,9 +1502,9 @@ function quiz() {
       duration: null,
       desired: [],
       strandType: null,
-      productLoad: null,
-      tried: [],
-      wetDry: null,
+      coping: null,
+      curlyProducts: null,
+      dries: null,
     },
     projectedDate: '',
     loaderPct: 0,
@@ -1605,7 +1605,8 @@ function quiz() {
     async checkout(btn) {
       if (this.claiming) return;
       if (!window.__quizCheckout) {
-        alert('Checkout is still loading. Please try again in a moment.');
+        // Fallback if the storefront script hasn't attached yet — go to the product page directly.
+        window.location.href = 'https://merwave.com/products/merwave-starter-kit';
         return;
       }
       this.claiming = true;
@@ -1621,8 +1622,8 @@ function quiz() {
     },
     canContinue() {
       if (this.step === 6)  return this.answers.desired.length > 0;
-      if (this.step === 11) return this.answers.tried.length > 0;
-      if (this.step === 12) return !!this.answers.wetDry;
+      if (this.step === 11) return !!this.answers.curlyProducts;
+      if (this.step === 12) return !!this.answers.dries;
       return true;
     },
     continueLabel() {
@@ -1638,14 +1639,12 @@ function quiz() {
 </script>
 
 <!-- ============================================
-     SHOPIFY STOREFRONT (cart.create → checkoutUrl)
+     SHOPIFY STOREFRONT (live price/image → product page)
      ============================================
-     TODO [confirm] — fill these with the real Merwave store values before launch:
-       SHOP_DOMAIN          — e.g. merwave.myshopify.com
-       STOREFRONT_TOKEN     — Storefront API access token (Shopify Admin → Apps → Develop apps)
-       PRODUCT_HANDLE       — handle of the Wavy Hair Starter Kit
-       PREFERRED_VARIANT_GID— gid://shopify/ProductVariant/XXXXXXXXXX
-     Until filled, the checkout button shows a friendly "not available yet" alert.
+     The CTA now routes visitors to the product page (PRODUCT_URL below),
+     not straight to checkout. The Storefront API is used only to pull the
+     live price and product image onto the sales screen; if it fails, the
+     CTA still works and falls back to the hard-coded copy.
      ============================================ -->
 <script>
 (function () {
@@ -1692,20 +1691,6 @@ function quiz() {
     return data && data.productByHandle;
   }
 
-  async function cartCreate(merchandiseId, quantity, country) {
-    const data = await gql(
-      `mutation CartCreate($lines: [CartLineInput!], $country: CountryCode!) @inContext(country: $country) {
-        cartCreate(input: { lines: $lines, buyerIdentity: { countryCode: $country } }) {
-          cart { id checkoutUrl }
-          userErrors { field message }
-        }
-      }`,
-      { lines: [{ merchandiseId, quantity }], country }
-    );
-    const payload = data.cartCreate;
-    if (payload.userErrors && payload.userErrors.length) throw new Error(payload.userErrors[0].message);
-    return payload.cart;
-  }
 
   // Format a money amount using the variant's own currency.
   function money(amount, currency) {
@@ -1731,8 +1716,7 @@ function quiz() {
     const cur = v.price;
     const curStr = money(cur.amount, cur.currencyCode);
     document.querySelectorAll('[data-price-current]').forEach((el) => { el.textContent = curStr; });
-    const ctaEl = document.querySelector('[data-cta-price]');
-    if (ctaEl) ctaEl.textContent = `Bring my waves back — ${curStr}`;
+    // CTA now routes to the product page (not checkout), so it keeps its static label.
     const perEl = document.querySelector('[data-price-perday]');
     if (perEl) perEl.textContent = perDay(cur.amount, cur.currencyCode);
 
@@ -1778,21 +1762,13 @@ function quiz() {
   }
   init();
 
+  // The quiz now sends visitors to the product page rather than straight to checkout,
+  // so they land on the full PDP to choose and add to cart there.
+  const PRODUCT_URL = 'https://merwave.com/products/merwave-starter-kit';
+
   window.__quizCheckout = async function (btn) {
-    if (!CONFIGURED || !variant) {
-      btn && btn.removeAttribute('aria-busy');
-      alert('Sorry, checkout isn\'t available yet. (Shopify credentials pending.)');
-      return;
-    }
-    btn.setAttribute('aria-busy', 'true');
-    try {
-      const cart = await cartCreate(variant.id, 1, countryCode);
-      window.location.href = cart.checkoutUrl;
-    } catch (err) {
-      console.error('[Checkout]', err);
-      btn.removeAttribute('aria-busy');
-      alert('Sorry, we couldn\'t start your checkout. Please try again.');
-    }
+    btn && btn.setAttribute('aria-busy', 'true');
+    window.location.href = PRODUCT_URL;
   };
 })();
 </script>
